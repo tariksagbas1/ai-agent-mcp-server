@@ -153,15 +153,15 @@ class State(TypedDict):
 # --- Build the StateGraph ---
 graph_builder = StateGraph(State)
 
-def pick_tools_node(state: State):
-    print("Getting tools...")
-    user_prompt = state["messages"][-1].content
-    res = mcp_tool_call("pick_tools", {"user_prompt": user_prompt})
-    res = json.loads(res.get("content")[0].get("text")).get("result")
-    selected_tools = json.loads(res)
-    print(f"Selected Tools: {selected_tools}")
-    state["allowed_tools"] = selected_tools
-    return state
+# def pick_tools_node(state: State):
+#     print("Getting tools...")
+#     user_prompt = state["messages"][-1].content
+#     # res = mcp_tool_call("pick_tools", {"user_prompt": user_prompt})
+#     # res = json.loads(res.get("content")[0].get("text")).get("result")
+#     # selected_tools = json.loads(res)
+#     # print(f"Selected Tools: {selected_tools}")
+#     state["allowed_tools"] = tools
+#     return state
 
 def agent_node(state: State):
     print("Calling Agent...")
@@ -192,11 +192,11 @@ def agent_node(state: State):
         return state
 
 # Add nodes and edges as per docs
-graph_builder.add_node("PICK_TOOLS", pick_tools_node)
+# graph_builder.add_node("PICK_TOOLS", pick_tools_node)
 graph_builder.add_node("TRIGGER_AGENT", agent_node)
 
-graph_builder.add_edge(START, "PICK_TOOLS")
-graph_builder.add_edge("PICK_TOOLS", "TRIGGER_AGENT")
+# graph_builder.add_edge(START, "PICK_TOOLS")
+graph_builder.add_edge(START, "TRIGGER_AGENT")
 graph_builder.add_edge("TRIGGER_AGENT", END)
 
 graph = graph_builder.compile(checkpointer=memory)
@@ -240,9 +240,26 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.post("/agent")
-async def run_agent(req : Request):
-    data = await req.json()
+# @app.post("/agent")
+# async def run_agent(req : Request):
+#     data = await req.json()
+#     session_id = data.get("session_id")
+#     question = data.get("question")
+
+#     print("User input:", question)
+#     print("Session ID:", session_id)
+
+#     config = {"configurable": {"thread_id": session_id}}
+
+#     state = State()
+#     state["messages"] = [HumanMessage(content=question)]
+#     final_state = graph.invoke(state, config)
+#     agent_response = final_state["messages"][-1].content
+#     return {"response": agent_response}
+    
+
+def run_agent(req):
+    data = req
     session_id = data.get("session_id")
     question = data.get("question")
 
@@ -260,7 +277,8 @@ async def run_agent(req : Request):
 
 
 
-
 if __name__ == "__main__":
-    uvicorn.run("lg_agent:app", host="0.0.0.0", port=8080, reload=True)
+    #uvicorn.run("lg_agent:app", host="0.0.0.0", port=8080, reload=True)
+    run_agent({"session_id": "test_session", "question": "fgdfgfsfsdff ?"})
+
 

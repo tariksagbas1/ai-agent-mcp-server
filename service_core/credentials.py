@@ -1,0 +1,2 @@
+DEFAULT_USERNAME = "platform"
+DEFAULT_PASSWORD = "platform"

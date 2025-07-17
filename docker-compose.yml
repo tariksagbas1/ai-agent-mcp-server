@@ -1,0 +1,20 @@
+services:
+  icron-llm:
+    image: "deploymentagent.azurecr.io/icron-llm:${ICRON_LLM_SERVICE_VERSION}"
+    container_name: "icron-llm_${DEPLOYMENT_CODE}_${SERVICE_CODE}"
+    restart: unless-stopped
+    ports:
+      - "${EXTERNAL_PORT}:8000"
+    volumes:
+      - ./configs:/app/configs
+      - ../../../${DEPLOYMENT_CODE}.idep:/app/configs/${DEPLOYMENT_CODE}.idep
+    networks:
+      - internal_network
+    environment:
+      - DEPLOYMENT_CODE=${DEPLOYMENT_CODE}
+      - SERVICE_CODE=${SERVICE_CODE}
+
+networks:
+  internal_network:
+    name: internal_network
+    driver: bridge

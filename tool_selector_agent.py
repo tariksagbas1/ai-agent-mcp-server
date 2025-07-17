@@ -92,19 +92,16 @@ async def get_tools(req : Request):
     if response.choices[0].message.tool_calls:
         # Regular tool calls
         for tool_call in response.choices[0].message.tool_calls:
-            selected_tools.append({
-                "name": tool_call.function.name,
-                "arguments": json.loads(tool_call.function.arguments)
-            })
+            function_call_json = tool_call.function.model_dump()
+            selected_tools.append(function_call_json)
+
     elif hasattr(response.choices[0].message, 'parallel_tool_calls') and response.choices[0].message.parallel_tool_calls:
         # Parallel tool calls
         for parallel_call in response.choices[0].message.parallel_tool_calls:
             for tool_call in parallel_call.tool_calls:
                 print(tool_call.function.name)
-                selected_tools.append({
-                    "name": tool_call.function.name,
-                    "arguments": json.loads(tool_call.function.arguments)
-                })
+                function_call_json = tool_call.function.model_dump()
+                selected_tools.append(function_call_json)
     else:
         # Text response (when content is not None)
         selected_tools = response.choices[0].message.content
