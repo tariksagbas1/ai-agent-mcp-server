@@ -1,3 +1,4 @@
+
 from fastmcp import FastMCP
 from datetime import datetime
 from openai import OpenAI
@@ -13,9 +14,11 @@ import asyncio
 from supabase import create_client
 from fastmcp.server.dependencies import get_http_headers, get_http_request
 from fastmcp.server.middleware import Middleware, MiddlewareContext
-import pandas as pd
-#from setup import icron_data_extract
-
+from fastmcp.tools.tool import FunctionTool
+from fastmcp.tools.tool import Tool
+from datetime import datetime
+from fastmcp.resources import FileResource
+from pathlib import Path
 load_dotenv()
 
 class LoggingMiddleware(Middleware):
@@ -27,11 +30,155 @@ class LoggingMiddleware(Middleware):
         print("===========================")
         result = await call_next(context)
         return result
-    
+
+
+# Helper Functions
+def get_message_json(tool_name, **kwargs):
+    # TODO: Implement this
+    return json.dumps(kwargs)
+
+def external_function_call(tool_name, json_msg):
+    # TODO: Implement this
+    return {"IsFeasible": True}
+
+def get_data_message(table_name, **kwargs):
+    # TODO: Implement this
+    return json.dumps(kwargs)
+
+def external_data_extract_call(table_name, json_msg):
+    # TODO: Implement this
+    return {"result": json_msg}
+
+def param_to_python_type(param_type: str) -> str:
+    if param_type == "string" or param_type == "text":
+        return "str"
+    elif param_type == "integer":
+        return "int"
+    elif param_type == "boolean":
+        return "bool"
+    elif param_type == "list" or param_type == "array":
+        return "list"
+    elif param_type == "dictionary":
+        return "dict"
+    elif param_type == "float" or param_type == "real":
+        return "float"
+    else:
+        return param_type
+
+def register_tools_from_idep(mcp: FastMCP, idep_file: str):
+    """
+    Registers the tools from the IDEP file.
+    """
+    with open(idep_file, "r") as file:
+        function_jsons = json.load(file).get("LLMTools", {}).get("Functions", {})
+    for tool_name, tool_json in function_jsons.items():
+
+        tool_description = tool_json.get("description", "")
+        tool_params = tool_json.get("params", {})
+        tool_returns = tool_json.get("returns", {})
+        tool_constants = tool_json.get("constants", {})
+
+
+        # Generate the function signature
+        param_strs = []
+        for param, typ in tool_params.items():
+            param_strs.append(f"{param}: {param_to_python_type(typ)}")
+
+        if tool_constants:
+            for param, typ in tool_constants.items():
+                param_strs.append(f"{param}: {param_to_python_type(typ)}")
+
+        param_sig = ", ".join(param_strs)
+        
+        # Generate the function code
+        function_code = f"""
+def {tool_name}({param_sig}):
+    \"\"\"{tool_description}\"\"\"
+    kwargs = locals()
+    json_msg = get_message_json('{tool_name}', **kwargs)
+    result = external_function_call('{tool_name}', json_msg)
+    return result
+        """
+        # Get the function executable
+        namespace = {"get_message_json": get_message_json, "external_function_call": external_function_call} # Generate a namespace
+        exec(function_code, namespace) # Save function definition to namespace
+        tool_func = namespace[tool_name] # Point to the function definition
+
+        
+        output_schema = {
+            "type": "object",
+            "additionalProperties" : False,
+            "properties": {
+                # Filling this part dynamically
+                #...
+                #...
+            }
+            # "required": [] Used for non-default values
+            }
+        for param_name, param_type in tool_returns.items():
+            if param_type == "list" or param_type == "array":
+                output_schema["properties"][param_name] = {"type": "array"}
+            else:
+                output_schema["properties"][param_name] = {"type": param_type}
+        
+        # Register the tool
+        mcp.tool(tool_func, output_schema=output_schema)
+
+def register_resources_from_idep(mcp: FastMCP, idep_file: str):
+    """
+    Registers the resources from the IDEP file.
+    """
+    with open(idep_file, "r") as file:
+        db_schemas = json.load(file).get("LLMTools", {}).get("DBSchemas", {})
+    for db_schema in db_schemas:
+        table_name, table_json = next(iter(db_schema.items()))
+        table_description : str = table_json.get("Description", "")
+        primary_keys : list[str] = table_json.get("PrimaryKeys", [])
+        fields : dict = table_json.get("Fields", {})
+
+        param_strs = []
+        for field_name, field_type in fields.items():
+            param_strs.append(f"{field_name}: {param_to_python_type(field_type)}")
+
+        param_sig = ", ".join(param_strs)
+
+        function_code = f"""
+def {table_name}({param_sig}):
+    \"\"\"{table_description}\"\"\"
+    kwargs = locals()
+    json_msg = get_data_message('{table_name}', **kwargs)
+    result = external_data_extract_call('{table_name}', json_msg)
+    return result
+        """
+        # Get the function executable
+        namespace = {"datetime": datetime, "get_data_message": get_data_message, "external_data_extract_call": external_data_extract_call} # Generate a namespace
+        exec(function_code, namespace) # Save function definition to namespace
+        resource_func = namespace[table_name] # Point to the function definition
+
+        uri_params = "/".join([f"{{{field}}}" for field in fields.keys()])
+        resource_uri = f"resource://{table_name}/{uri_params}"
+
+        # Register the resource
+        mcp.resource(resource_uri)(resource_func)
+
 
 mcp = FastMCP(name="Icron MCP Server", stateless_http=True, instructions="This is a simple MCP server that serves the Icron company.")
 
 mcp.add_middleware(LoggingMiddleware())
+
+path = Path("./info.txt").resolve()
+if path.exists():
+    # Use a file:// URI scheme
+    readme_resource = FileResource(
+        uri=f"file://{path.as_posix()}",
+        path=path, # Path to the actual file
+        name="info.txt",
+        description="Gives information about Beykoz, Uskudar, Sancaktepe and their populations",
+        mime_type="text/plain",
+        tags={"info"}
+    )
+    mcp.add_resource(readme_resource)
+
 
 @mcp.tool
 def get_date_time(timezone: str = "Europe/Istanbul") -> dict:
@@ -55,6 +202,7 @@ def get_date_time(timezone: str = "Europe/Istanbul") -> dict:
         }
     except pytz.UnknownTimeZoneError:
         return {"result": json.dumps({"error": f"Unknown timezone: {timezone}"})}
+
 
 @mcp.tool
 def draft_mail(to: str, subject: str, body: str, cc: str = "", bcc: str = "") -> dict:
@@ -276,42 +424,36 @@ def get_employees(full_name: str = "", department: str = "", gender: str = "", o
         traceback.print_exc()
         return {"result": json.dumps({"error": f"Error getting employees: {e}"})}
 
-@mcp.tool()
-async def pick_tools(user_prompt: str) -> dict:
+@mcp.tool
+def ask_programmer_agent(user_prompt: str) -> dict:
     """
-    IMPORTANT: You must call this tool before using any other tool. Use the tools returned by this tool for the rest of the session.
-    Returns the tools that you will be using to satisfy the user's request
+    Use this tool if you are not able to satisfy the user's request. This tool will prompt the programmer agent to help you.
     """
-    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-    all_tools = await mcp.get_tools()
-
-    tool_list_str = "\n".join([f"{name}: {tool.description}" for i, (name, tool) in enumerate(all_tools.items())])
-    system_prompt = f"""You are a tool selector. Here are the available tools:\n{tool_list_str}\n"""
-    user_message = f"Given the user query: \"{user_prompt}\"\nSelect all tools that are necessary to satisfy the user's request. Reply with the tool names separated by commas."
-
-    client = OpenAI(api_key=OPENAI_API_KEY)
-    response = client.chat.completions.create(
-        model="gpt-4o",
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_message}
-        ],
-        temperature=0
+    payload = {
+        "user_prompt": user_prompt
+    }
+    
+    resp = requests.post(
+        "http://127.0.0.1:8000/test",
+        json=payload,
+        headers={
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
     )
 
-    selected_tools = response.choices[0].message.content
-    selected_tools = [item.strip() for item in selected_tools.split(",")]
-
-    if "pick_tools" in selected_tools:
-        selected_tools.remove("pick_tools")
-    print("SELECTED TOOLS ARE :", selected_tools)
-    return {"result": json.dumps(selected_tools)}
-
-
-
-
 if __name__ == "__main__":
-
+    register_tools_from_idep(mcp, "config/test_config.idep")
+    register_resources_from_idep(mcp, "config/test_config.idep")
+    all_tools = asyncio.run(mcp.get_tools())
+    """
+    for t in all_tools:
+        print("*"*100)
+        print(t)
+        print("*"*100)
+        print(all_tools[t])
+        print("*"*100)
+    """
     mcp.run(transport="http", port=8000, log_level="debug")
 
 

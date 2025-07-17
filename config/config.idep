@@ -1144,7 +1144,7 @@
           }
         ],
         "MCPTools" : [
-          "get_date_time", "draft_mail", "send_mail", "get_employees"
+          "get_date_time", "draft_mail", "send_mail", "get_employees", "OrderSimulation"
         ],
         "LLMTools": [
           {"ContractType": {"Description": "", "PrimaryKeys": [], "Fields": {"Code": "text", "ContractTypeID": "integer", "IsActive": "integer", "ScenarioID": "integer"}}}

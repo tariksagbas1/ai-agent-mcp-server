@@ -144,7 +144,6 @@ def make_tool_func(tool_name, input_schema):
     return tool_func
 
 
-
 # --- Define State Schema ---
 class State(TypedDict):
     messages: Annotated[list, add_messages]
@@ -168,8 +167,8 @@ def agent_node(state: State):
     print("Calling Agent...")
     selected_tools = state.get("allowed_tools", [])
     filtered_tools = [tool for tool in tools if tool.name in selected_tools]
-    llm_with_tools = llm.bind_tools(filtered_tools)
-    agent = create_react_agent(llm_with_tools, tools=filtered_tools, prompt=system_prompt)
+    llm_with_tools = llm.bind_tools(tools)
+    agent = create_react_agent(llm_with_tools, tools=tools, prompt=system_prompt)
     try:
         result = agent.invoke({"messages": state["messages"]})
     except Exception as e:
@@ -211,10 +210,8 @@ async def lifespan(app : FastAPI):
     # Fetch all tools from MCP Server
     async with Client(MCP_SERVER_URL) as client:
         all_tools = await client.list_tools()
-    # Fetch allowed tools from config file
-    allowed_tool_names = get_allowed_tools(CONFIG_FILE_PATH)
-    allowed_tools = [tool for tool in all_tools if tool.name in allowed_tool_names]
-    for tool in allowed_tools:
+    
+    for tool in all_tools:
         print(f"Tool: {tool.name}")
         if hasattr(tool, "inputSchema"):
             pyd_model = schema_to_pydantic(tool.name, tool.inputSchema)
