@@ -31,7 +31,8 @@ MCP_SERVER_URL = "http://127.0.0.1:8000/mcp/"
 CONFIG_FILE_PATH = "config/config.idep"
 
 memory = MemorySaver()
-llm = ChatOpenAI(openai_api_key=OPENAI_API_KEY, temperature=0, model="gpt-4o-mini")
+model_name = "gpt-4o-mini"
+llm = ChatOpenAI(openai_api_key=OPENAI_API_KEY, temperature=0, model=model_name)
 tools = []
 
 
@@ -239,6 +240,34 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+@app.post("/all_tools")
+async def get_all_tools(req : Request):
+    data = await req.json()
+    print(data)
+    global all_tools
+    transformed_tools = []
+    for tool in all_tools:
+        transformed_tools.append({
+            "name" : tool.name,
+            "description" : tool.description,
+            "inputSchema" : tool.inputSchema,
+        })
+    print(transformed_tools[2])
+    return {"response" : transformed_tools}
+
+@app.post("/call_tool")
+async def call_tool_endpoint(req: Request):
+    data = await req.json()
+    tool_name = data.get("tool_name")
+    arguments = data.get("arguments", {})
+    if not tool_name:
+        return {"error": "tool_name is required"}
+    async with Client(MCP_SERVER_URL) as client:
+        try:
+            result = await client.call_tool(tool_name, arguments)
+            return {"result": result}
+        except Exception as e:
+            return {"error": str(e)}
 
 @app.post("/agent")
 async def run_agent(req : Request):

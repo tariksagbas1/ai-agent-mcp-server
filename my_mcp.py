@@ -19,6 +19,7 @@ from fastmcp.tools.tool import Tool
 from datetime import datetime
 from fastmcp.resources import FileResource
 from pathlib import Path
+from fastapi.middleware.cors import CORSMiddleware
 load_dotenv()
 
 class LoggingMiddleware(Middleware):
@@ -166,6 +167,7 @@ mcp = FastMCP(name="Icron MCP Server", stateless_http=True, instructions="This i
 
 mcp.add_middleware(LoggingMiddleware())
 
+
 path = Path("./info.txt").resolve()
 if path.exists():
     # Use a file:// URI scheme
@@ -202,7 +204,6 @@ def get_date_time(timezone: str = "Europe/Istanbul") -> dict:
         }
     except pytz.UnknownTimeZoneError:
         return {"result": json.dumps({"error": f"Unknown timezone: {timezone}"})}
-
 
 @mcp.tool
 def draft_mail(to: str, subject: str, body: str, cc: str = "", bcc: str = "") -> dict:
@@ -442,6 +443,7 @@ def ask_programmer_agent(user_prompt: str) -> dict:
         }
     )
     return {"result": json.dumps("asd")}
+
 
 if __name__ == "__main__":
     register_tools_from_idep(mcp, "config/test_config.idep")
