@@ -16,8 +16,9 @@ SERVICE_CODE = os.getenv("SERVICE_CODE")
 DEPLOYMENT_CODE = os.getenv("DEPLOYMENT_CODE")   
 
 def rpc_call(message_code: str, payload: dict, headers:dict, timeout=5):
+    
     service = load_services()
-    metadata = resolve([service], message_code, SERVICE_CODE, prefer_server=True)
+    metadata = resolve([service], message_code, SERVICE_CODE, prefer_server=False)
 
     connection = pika.BlockingConnection(get_connection_parameters(metadata))
     channel = connection.channel()

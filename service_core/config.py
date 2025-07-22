@@ -1,12 +1,15 @@
 import os
 import json
 from dotenv import load_dotenv
+from pathlib import Path
 
 load_dotenv()
+PROJECT_DIR = Path(__file__).resolve().parent.parent
 
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 DEPLOYMENT_CODE = os.getenv("DEPLOYMENT_CODE")  
 SERVICE_CODE    = os.getenv("SERVICE_CODE")      
-IDEP_DIR        = "service_core/idep"
+IDEP_DIR = os.path.join(PROJECT_DIR, "configs")
 
 def load_services():
     idep_path = os.path.join(IDEP_DIR, f"{DEPLOYMENT_CODE}.idep")

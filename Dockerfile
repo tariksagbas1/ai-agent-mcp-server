@@ -25,7 +25,7 @@ COPY . .
 
 # Create a startup script
 RUN echo '#!/bin/bash' > /start_service.sh && \
-    echo "python ${APP_DIR}/service.py" >> /start_service.sh && \
+    echo "python my_mcp.py" >> /start_service.sh && \
     chmod +x /start_service.sh
 
 # Run the service

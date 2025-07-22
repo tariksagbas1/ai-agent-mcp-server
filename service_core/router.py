@@ -24,24 +24,28 @@ def resolve(service_list, message_code, service_code, allow_only_sendable=False,
 
     for section, key_name in sections:
         for entry in service.get(section, []):
+            print("key_name", key_name)
+            print("entry", entry)
+            print("message_code", message_code)
             if entry.get(key_name) != message_code:
                 continue
 
-            input_queues = entry.get("InputQueues", [])
-            if not input_queues:
-                raise ValueError(f"No InputQueues found for message_code '{message_code}' in section '{section}'.")
+            #input_queues = entry.get("MBQueueName", [])
+            
+           # if not input_queues:
+              #  raise ValueError(f"No InputQueues found for message_code '{message_code}' in section '{section}'.")
 
-            queue_info = input_queues[0]
+            #queue_info = input_queues[0]
 
             return {
                 "exchange": entry.get("MBExchangeName", ""),
-                "routing_key": entry.get("RoutingKey", queue_info["MBQueueName"]),
-                "queue": queue_info["MBQueueName"],  # for fallback/default
-                "host": queue_info.get("MBHost"),
-                "vhost": queue_info.get("MBVirtualHostName"),
-                "port": queue_info.get("MBPort"),
-                "username": queue_info.get("MBUserName", DEFAULT_USERNAME),
-                "password": queue_info.get("MBPassword", DEFAULT_PASSWORD)
+                "routing_key": next(iter(entry.get("RoutingKeyParameters", {}).values()), message_code),
+                #"routing_key": "ExtractData",
+                "host": entry.get("MBHost"),
+                "vhost": entry.get("MBVirtualHostName"),
+                "port": entry.get("MBPort"),
+                "username": entry.get("MBUserName", DEFAULT_USERNAME),
+                "password": entry.get("MBPassword", DEFAULT_PASSWORD)
             }
 
     raise ValueError(f"Message code '{message_code}' not found in any supported sections.")

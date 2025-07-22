@@ -1,0 +1,681 @@
+{
+  "DeploymentCode": "Tarik",
+  "DraftStatus": 0,
+  "DeployStatus": 1,
+  "Deleted": 0,
+  "Services": [
+    {
+      "ServiceCode": "MessageBroker",
+      "ServiceTemplateCode": "RabbitMQ",
+      "ServiceType": 4,
+      "AgentCode": "Platform_Tarik",
+      "ServiceParameters": {},
+      "ICMOptions": {
+        "StartMode": "Auto",
+        "ICRONQueryTimeout": 5000,
+        "ICRONShutdownTimeout": 2,
+        "UpdatePolicy": 0
+      },
+      "ConsumedMessages": [],
+      "ProducedMessages": [],
+      "RPCMessages_Client": [],
+      "RPCMessages_Server": [],
+      "MessageBrokerOptions": {
+        "RabbitMQImage": "rabbitmq:4.0.9-management",
+        "Host": "localhost",
+        "Port": 5672,
+        "ManagementPort": 15672,
+        "AdminUser": "platform",
+        "AdminPassword": "platform",
+        "TemplateVersion": "1",
+        "TimeZone": "UTC",
+        "Users": [
+          {
+            "DeploymentCode": "Tarik",
+            "ServiceCode": "MCP",
+            "NumberOfInstances": 1,
+            "Credentials": [
+              {
+                "Username": "MCP_0@Tarik",
+                "Password": "MCP_0@Tarik"
+              }
+            ]
+          },
+          {
+            "DeploymentCode": "Tarik",
+            "ServiceCode": "ODP",
+            "NumberOfInstances": 1,
+            "Credentials": [
+              {
+                "Username": "ODP_0@Tarik",
+                "Password": "ODP_0@Tarik"
+              }
+            ]
+          }
+        ],
+        "VirtualHosts": [
+          {
+            "MBVirtualHostName": "melih.poyraz",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "melihQueue"
+              }
+            ],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "Platform",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "DS"
+              },
+              {
+                "QueueName": "Server1"
+              },
+              {
+                "QueueName": "Optimization"
+              },
+              {
+                "QueueName": "DataManager"
+              },
+              {
+                "QueueName": "DS-Backup"
+              }
+            ],
+            "Queues": [],
+            "ExchangesFromTemplate": [
+              {
+                "ExchangeName": "Timeout"
+              }
+            ],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "/",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "DS"
+              },
+              {
+                "QueueName": "Server1"
+              },
+              {
+                "QueueName": "DataManager"
+              },
+              {
+                "QueueName": "Mattel_CCDP"
+              },
+              {
+                "QueueName": "Mattel_SDP"
+              },
+              {
+                "QueueName": "Mattel_SDP2"
+              },
+              {
+                "QueueName": "Mattel_SDP3"
+              },
+              {
+                "QueueName": "Mattel_UM"
+              },
+              {
+                "QueueName": "Mattel_Consolidation"
+              },
+              {
+                "QueueName": "Mattel_WF"
+              },
+              {
+                "QueueName": "Mattel_Integrator"
+              },
+              {
+                "QueueName": "CloudAPI_Platform"
+              },
+              {
+                "QueueName": "ExtractData"
+              },
+              {
+                "QueueName": "OrderSimulation"
+              },
+              {
+                "QueueName": "MCP"
+              }
+            ],
+            "Queues": [
+              {
+                "QueueName": "LLMChat"
+              },
+              {
+                "QueueName": "MCP"
+              }
+            ],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "beyza.tozman",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "Server1"
+              },
+              {
+                "QueueName": "DS"
+              },
+              {
+                "QueueName": "DataManager"
+              },
+              {
+                "QueueName": "beyzaQueue"
+              },
+              {
+                "QueueName": "Beyza"
+              },
+              {
+                "QueueName": "BeyzaProMes"
+              }
+            ],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "omer.bekmezci",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "DS"
+              },
+              {
+                "QueueName": "Server1"
+              },
+              {
+                "QueueName": "Integrator"
+              },
+              {
+                "QueueName": "IBP"
+              },
+              {
+                "QueueName": "DDP"
+              },
+              {
+                "QueueName": "omerQueue"
+              },
+              {
+                "QueueName": "Auth"
+              },
+              {
+                "QueueName": "WFM"
+              }
+            ],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "murat.saka",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "muratds"
+              },
+              {
+                "QueueName": "DS"
+              }
+            ],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "tolga.koc",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "DS"
+              },
+              {
+                "QueueName": "Server1"
+              }
+            ],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "goktug.ibolar",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "goktugQueue"
+              },
+              {
+                "QueueName": "DS"
+              },
+              {
+                "QueueName": "Server1"
+              },
+              {
+                "QueueName": "DataManager"
+              }
+            ],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "ahmet.cakar",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "DS"
+              },
+              {
+                "QueueName": "Server1"
+              }
+            ],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "cenkhan.tarkan",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "DS"
+              }
+            ],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "berkay.sarialioglu",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "berkayTestQueue"
+              }
+            ],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "beyzagul.demir",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "Mattel_SDP3"
+              },
+              {
+                "QueueName": "Mattel_SDP2"
+              },
+              {
+                "QueueName": "Mattel_SDP"
+              },
+              {
+                "QueueName": "Mattel_CCDP"
+              },
+              {
+                "QueueName": "Mattel_Integrator"
+              },
+              {
+                "QueueName": "Mattel_UM"
+              }
+            ],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "kardelen.emirhan",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "DS"
+              },
+              {
+                "QueueName": "Server1"
+              },
+              {
+                "QueueName": "Optimization"
+              }
+            ],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "aytar.akdemir",
+            "QueuesFromTemplate": [],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "furkan.canturk",
+            "QueuesFromTemplate": [],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "bahadir.temel",
+            "QueuesFromTemplate": [],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "kaan.erol",
+            "QueuesFromTemplate": [],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "tarik.sagbas",
+            "QueuesFromTemplate": [],
+            "Queues": [
+              {
+                "QueueName": "MCP"
+              },
+              {
+                "QueueName": "ExtractData"
+              },
+              {
+                "QueueName": "OrderSimulation"
+              },
+              {
+                "QueueName": "InitializeLLMAgent"
+              },
+              {
+                "QueueName": "RemoveLLMAgent"
+              }
+            ],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [
+              {
+                "ExchangeName": "Exc"
+              }
+            ],
+            "BindingsFromTemplate": [],
+            "Bindings": [
+              {
+                "BindingName": "ExtractData"
+              },
+              {
+                "BindingName": "OrderSimulation"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "ServiceCode": "MCP",
+      "ServiceTemplateCode": "MCP",
+      "ServiceType": 7,
+      "AgentCode": "Platform_Tarik",
+      "ServiceParameters": {},
+      "ICMOptions": {
+        "StartMode": "Auto",
+        "ICRONQueryTimeout": 5000,
+        "ICRONShutdownTimeout": 2,
+        "UpdatePolicy": 0
+      },
+      "ConsumedMessages": [],
+      "ProducedMessages": [],
+      "RPCMessages_Client": [
+        {
+          "RequestMessageCode": "OrderSimulation",
+          "ResponseMessageCode": "",
+          "MBDeploymentCode": "Tarik",
+          "MBServiceCode": "MessageBroker",
+          "MBVirtualHostName": "tarik.sagbas",
+          "MBExchangeName": "Exc",
+          "MBHost": "localhost",
+          "MBPort": 5672,
+          "RoutingKeyParameters": {
+            "OrderSimulation": "OrderSimulation"
+          }
+        },
+        {
+          "RequestMessageCode": "ExtractData",
+          "ResponseMessageCode": "",
+          "MBDeploymentCode": "Tarik",
+          "MBServiceCode": "MessageBroker",
+          "MBVirtualHostName": "tarik.sagbas",
+          "MBExchangeName": "Exc",
+          "MBHost": "localhost",
+          "MBPort": 5672,
+          "RoutingKeyParameters": {
+            "ExtractData": "ExtractData"
+          }
+        }
+      ],
+      "RPCMessages_Server": [],
+      "LLMServiceOptions": {
+        "LLMServiceVersion": "mcp-test",
+        "TemplateVersion": "1",
+        "HostUrl": "http:/localhost:4500",
+        "ExternalPort": 4500,
+        "LLMTools": {
+          "Functions": {
+            "OrderSimulation": {
+              "description": "It simulates a customer order and determines whether the order can be satisfied. Date format: %Y-%m-%d %H:%M:%S. Default line status (or status): \u0027Confirmed\u0027. Default priority is 1.",
+              "constants": {
+                "ScenarioCode": "string",
+                "UserName": "string",
+                "InventoryCode": "string"
+              },
+              "params": {
+                "CustomerName": "string",
+                "ItemName": "string",
+                "Priority": "integer",
+                "Quantity": "integer",
+                "Date": "string",
+                "LineStatus": "string"
+              },
+              "returns": {
+                "IsFeasible": "boolean"
+              }
+            }
+          },
+          "DBSchemas": [
+            {
+              "Inventory": {
+                "Description": "",
+                "PrimaryKeys": [
+                  "InventoryCode"
+                ],
+                "Fields": {
+                  "CategoryCode": "text",
+                  "DailySupplyRate": "real",
+                  "InventoryCode": "text",
+                  "InventoryID": "integer",
+                  "InventoryType": "text",
+                  "ItemCode": "text",
+                  "LeadTime": "real",
+                  "MacroFamilyCode": "text",
+                  "MaximumInventory": "real",
+                  "MinimumInventory": "real",
+                  "PremiumLeadTime": "integer",
+                  "ProductFamilyCode": "text",
+                  "ReliabilityCategory": "text",
+                  "SafetyInventory": "real"
+                }
+              }
+            },
+            {
+              "SalesItem": {
+                "Description": "",
+                "PrimaryKeys": [
+                  "SalesItemCode"
+                ],
+                "Fields": {
+                  "CustomerCode": "text",
+                  "Region": "text",
+                  "Country": "text",
+                  "InventoryCode": "text",
+                  "ItemCode": "text",
+                  "SalesDate": "datetime",
+                  "SalesItemID": "integer",
+                  "SalesQuantity": "real",
+                  "SalesPrice": "real"
+                }
+              }
+            },
+            {
+              "CustomerOrderItem": {
+                "Description": "",
+                "PrimaryKeys": [
+                  "CustomerCode",
+                  "ItemCode"
+                ],
+                "Fields": {
+                  "CustomerName": "text",
+                  "CustomerCode": "text",
+                  "ItemCode": "text",
+                  "OrderStatus": "text",
+                  "OrderPriority": "text",
+                  "RequestedQuantity": "real",
+                  "DeliveredQuantity": "real",
+                  "RequestedDueDate": "datetime",
+                  "DeliveryDueDate": "datetime",
+                  "DueDate": "datetime"
+                }
+              }
+            },
+            {
+              "Customer": {
+                "Description": "",
+                "PrimaryKeys": [
+                  "CustomerCode"
+                ],
+                "Fields": {
+                  "CustomerCode": "text",
+                  "CustomerName": "text",
+                  "Region": "text",
+                  "Country": "text",
+                  "ReliabilityCategory": "text",
+                  "SalesChannelCode": "text",
+                  "OTIFPromised": "real",
+                  "OTIFRequested": "real",
+                  "RevenuePercent": "real",
+                  "TotalOrders": "real",
+                  "TotalRevenue": "real"
+                }
+              }
+            }
+          ],
+          "SystemPrompt": "Note that OTIF means On-Time-In-Full and it is a percentage value.\n Order Priority values are \u0027High\u0027, \u0027Medium\u0027, and \u0027Low\u0027.\n There can be multiple sales for the same item on the same date, so, you may need to aggregate them.\n Do not forget to sort data based on date before plotting a time line chart.\n Orders data include multiple entries for the same customer.  Remember to aggregate them for customer-order analysis questions.\n The \u0027Code\u0027 columns refer to foreign or primary keys.\n So you may need to merge / join dataframes based on \u0027Code\u0027 columns.\n If user asks an explanation, you should give a text-based response."
+        },
+        "LLMCredentials": [
+          {
+            "Name": "openai",
+            "APIKey": "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"
+          }
+        ]
+      }
+    },
+    {
+      "ServiceCode": "ODP",
+      "ServiceTemplateCode": "ODP_5004_MCP_COMPATIBLE",
+      "ServiceType": 0,
+      "AgentCode": "Platform_Tarik",
+      "ServiceParameters": {},
+      "ICMOptions": {
+        "StartMode": "Auto",
+        "ICRONQueryTimeout": 5000,
+        "ICRONShutdownTimeout": 2,
+        "UpdatePolicy": 0
+      },
+      "ConsumedMessages": [],
+      "ProducedMessages": [],
+      "RPCMessages_Client": [],
+      "RPCMessages_Server": [
+        {
+          "RequestMessageCode": "ODP",
+          "ResponseMessageCode": "",
+          "InputQueues": [
+            {
+              "MBDeploymentCode": "Tarik",
+              "MBServiceCode": "MessageBroker",
+              "MBVirtualHostName": "tarik.sagbas",
+              "MBQueueName": "ExtractData",
+              "MBHost": "localhost",
+              "MBPort": 5672
+            },
+            {
+              "MBDeploymentCode": "Tarik",
+              "MBServiceCode": "MessageBroker",
+              "MBVirtualHostName": "tarik.sagbas",
+              "MBQueueName": "OrderSimulation",
+              "MBHost": "localhost",
+              "MBPort": 5672
+            }
+          ]
+        }
+      ],
+      "ServerOptions": {
+        "Platform": "5004",
+        "DevelopmentMode": 1,
+        "NoOfInstances": 1,
+        "DeploymentOptions": {
+          "WorkingFolderName": "ODP",
+          "MainModuleName": "GARTNER_ODP_5004  ",
+          "MainModuleReleaseVersion": "54.8.0.2.2",
+          "BinaryVersion": "54.24.39878.5004"
+        },
+        "DataSources": [
+          {
+            "DSName": "defaultds",
+            "AgentDSName": "defaultds",
+            "DSType": "SQLITE",
+            "ConnectionInfo": "GARTNER_ODP.icdb"
+          }
+        ],
+        "RuntimeOptions": {
+          "PersistToFile": 0,
+          "DumpType": 0,
+          "AuthenticationMode": 6,
+          "PreventAuthorization": 0,
+          "PreventWriteToDB": 0,
+          "BaseScenarioDBID_Business": 1,
+          "BaseScenarioDBID_Organization": 0,
+          "WEBAPIStrictErrorCheck": 0,
+          "WEBAPIStrictAccessibilityCheck": 0
+        },
+        "Tracing": {},
+        "GsamsOptions": {}
+      }
+    }
+  ]
+}
