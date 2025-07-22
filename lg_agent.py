@@ -18,8 +18,8 @@ from langchain_core.messages import HumanMessage, AIMessage
 from fastmcp import Client
 from contextlib import asynccontextmanager
 from pydantic import create_model
-load_dotenv()
 
+load_dotenv()
 
 os.environ["LANGCHAIN_TRACING_V2"] = "true"
 os.environ["LANGCHAIN_ENDPOINT"] = "https://api.smith.langchain.com"
@@ -31,7 +31,7 @@ MCP_SERVER_URL = "http://127.0.0.1:8000/mcp/"
 CONFIG_FILE_PATH = "config/config.idep"
 
 memory = MemorySaver()
-llm = ChatOpenAI(openai_api_key=OPENAI_API_KEY, temperature=0, model="gpt-4o")
+llm = ChatOpenAI(openai_api_key=OPENAI_API_KEY, temperature=0, model="gpt-4o-mini")
 tools = []
 
 
@@ -155,12 +155,12 @@ graph_builder = StateGraph(State)
 
 def pick_tools_node(state: State):
     print("Getting tools...")
-    user_prompt = state["messages"][-1].content
-    res = mcp_tool_call("pick_tools", {"user_prompt": user_prompt})
-    res = json.loads(res.get("content")[0].get("text")).get("result")
-    selected_tools = json.loads(res)
-    print(f"Selected Tools: {selected_tools}")
-    state["allowed_tools"] = selected_tools
+    #user_prompt = state["messages"][-1].content
+    #res = mcp_tool_call("pick_tools", {"user_prompt": user_prompt})
+    #res = json.loads(res.get("content")[0].get("text")).get("result")
+    #selected_tools = json.loads(res)
+    #print(f"Selected Tools: {selected_tools}")
+    #state["allowed_tools"] = tools
     return state
 
 def agent_node(state: State):
@@ -262,5 +262,6 @@ async def run_agent(req : Request):
 
 
 if __name__ == "__main__":
+    load_dotenv()
     uvicorn.run("lg_agent:app", host="0.0.0.0", port=8080, reload=True)
 

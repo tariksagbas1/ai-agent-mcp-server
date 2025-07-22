@@ -424,7 +424,7 @@ def get_employees(full_name: str = "", department: str = "", gender: str = "", o
         traceback.print_exc()
         return {"result": json.dumps({"error": f"Error getting employees: {e}"})}
 
-@mcp.tool
+#@mcp.tool
 def ask_programmer_agent(user_prompt: str) -> dict:
     """
     Use this tool if you are not able to satisfy the user's request. This tool will prompt the programmer agent to help you.
@@ -441,6 +441,7 @@ def ask_programmer_agent(user_prompt: str) -> dict:
             "Content-Type": "application/json"
         }
     )
+    return {"result": json.dumps("asd")}
 
 if __name__ == "__main__":
     register_tools_from_idep(mcp, "config/test_config.idep")
@@ -454,6 +455,6 @@ if __name__ == "__main__":
         print(all_tools[t])
         print("*"*100)
     """
-    mcp.run(transport="http", port=8000, log_level="debug")
+    mcp.run(transport="http", port=8000, log_level="debug", host="0.0.0.0")
 
 
