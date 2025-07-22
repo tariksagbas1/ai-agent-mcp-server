@@ -54,7 +54,7 @@ def rpc_call(message_code: str, payload: dict, headers:dict, timeout=5):
             correlation_id=correlation_id,
             headers=headers
         ),
-        body=json.dumps(message)
+        body=json.dumps(payload)
     )
 
     channel.start_consuming()

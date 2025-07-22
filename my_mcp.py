@@ -84,8 +84,6 @@ def external_data_extract_call(table_name, **kwargs) -> pd.DataFrame:
     data = rpc_call("ExtractData", json_body, headers, 60)
 
     if (data):
-        print("data", data)
-        return data
         df = pd.DataFrame(data['Objects'])
         #rename_columns(df)
         for col in df.columns:
@@ -94,8 +92,10 @@ def external_data_extract_call(table_name, **kwargs) -> pd.DataFrame:
                     df[col] = pd.to_datetime(df[col])
                 except:
                     pass
+        
+        print(df.to_json(orient="records", force_ascii=False))
 
-        return df
+        return df.to_json(orient="records", force_ascii=False)
 
 def param_to_python_type(param_type: str) -> str:
     if param_type == "string" or param_type == "text":

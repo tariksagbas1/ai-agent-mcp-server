@@ -4,3 +4,7 @@
 [2025-07-22 12:09:32] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='ExtractData'
 [2025-07-22 12:09:44] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='ExtractData'
 [2025-07-22 12:16:00] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-22 12:31:06] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='ExtractData'
+[2025-07-22 12:35:10] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='ExtractData'
+[2025-07-22 12:40:06] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='ExtractData'
+[2025-07-22 12:41:36] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='ExtractData'
