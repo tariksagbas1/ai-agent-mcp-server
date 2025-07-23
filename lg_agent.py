@@ -242,8 +242,6 @@ app.add_middleware(
 )
 @app.post("/all_tools")
 async def get_all_tools(req : Request):
-    data = await req.json()
-    print(data)
     global all_tools
     transformed_tools = []
     for tool in all_tools:
@@ -268,6 +266,16 @@ async def call_tool_endpoint(req: Request):
             return {"result": result}
         except Exception as e:
             return {"error": str(e)}
+
+@app.post("/all_resource_templates")
+async def get_all_resource_templates(req : Request):
+    async with Client(MCP_SERVER_URL) as client:
+        resource_templates = await client.list_resource_templates()
+    print(resource_templates)
+    
+    return {"result": resource_templates}
+
+
 
 @app.post("/agent")
 async def run_agent(req : Request):
