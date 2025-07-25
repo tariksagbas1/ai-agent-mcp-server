@@ -1,0 +1,107 @@
+[2025-07-24 06:47:21] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 06:48:23] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 06:48:23] [INFO] [RPC] Received message: {'message_code': 'tools'}
+[2025-07-24 07:05:03] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 07:05:10] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 07:05:10] [INFO] [RPC] Received message: {'jsonrpc': '2.0', 'id': 1, 'method': 'tools/list'}
+[2025-07-24 07:18:09] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 07:18:13] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 07:18:13] [INFO] [RPC] Received message: {'jsonrpc': '2.0', 'id': 1, 'method': 'tools/list'}
+[2025-07-24 07:20:20] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 07:20:20] [INFO] [RPC] Received message: {'jsonrpc': '2.0', 'id': 1, 'method': 'resources/templates/list'}
+[2025-07-24 07:20:20] [ERROR] [RPC] Error processing message: Object of type FunctionResourceTemplate is not JSON serializable
+[2025-07-24 07:25:38] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 07:47:06] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 07:48:38] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 07:50:11] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 07:50:11] [INFO] [RPC] Received message: {'jsonrpc': '2.0', 'id': 1, 'method': 'resources/templates/list'}
+[2025-07-24 07:52:29] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 07:52:29] [INFO] [RPC] Received message: {'jsonrpc': '2.0', 'id': 1, 'method': 'resources/templates/list'}
+[2025-07-24 07:54:00] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 07:54:00] [INFO] [RPC] Received message: {'jsonrpc': '2.0', 'id': 1, 'method': 'resources/templates/list'}
+[2025-07-24 07:54:08] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 07:54:08] [INFO] [RPC] Received message: {'jsonrpc': '2.0', 'id': 1, 'method': 'resources/templates/list'}
+[2025-07-24 07:54:46] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 07:54:46] [INFO] [RPC] Received message: {'jsonrpc': '2.0', 'id': 1, 'method': 'resources/templates/list'}
+[2025-07-24 08:01:13] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 08:01:19] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 08:01:19] [ERROR] [RPC] Error processing message: the JSON object must be str, bytes or bytearray, not BasicProperties
+[2025-07-24 08:02:53] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 08:03:06] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 08:03:06] [INFO] [RPC] Received message: {'jsonrpc': '2.0', 'id': 1, 'method': 'resources/templates/list'}
+[2025-07-24 08:03:06] [ERROR] [RPC] Error processing message: 'BasicProperties' object has no attribute 'get'
+[2025-07-24 08:03:52] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 08:03:56] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 08:03:56] [INFO] [RPC] Received message: {'jsonrpc': '2.0', 'id': 1, 'method': 'resources/templates/list'}
+[2025-07-24 08:05:27] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 08:05:35] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 08:05:35] [INFO] [RPC] Received message: {'message': 'Give me my resource templates'}
+[2025-07-24 08:06:26] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 08:06:26] [INFO] [RPC] Received message: {'message': 'Give me my resource templates'}
+[2025-07-24 08:06:42] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 08:06:42] [INFO] [RPC] Received message: {'message': 'Give me my resource templates'}
+[2025-07-24 08:20:00] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-24 08:59:28] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 08:59:41] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 08:59:41] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 121, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-24 09:00:25] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 09:00:25] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 121, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-24 09:00:40] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 09:00:40] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 121, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-24 09:00:40] [ERROR] [RPC] Error calling tool: name 'asyncio' is not defined
+[2025-07-24 09:01:39] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 09:01:43] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 09:01:43] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 121, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-24 09:01:43] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-24 09:12:06] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 09:15:08] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 09:20:00] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 09:21:18] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='ExtractData'
+[2025-07-24 09:22:40] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='ExtractData'
+[2025-07-24 09:22:40] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 09:23:40] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='ExtractData'
+[2025-07-24 09:23:41] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 09:24:21] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='ExtractData'
+[2025-07-24 09:24:21] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 09:24:48] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='ExtractData'
+[2025-07-24 09:24:48] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 09:25:59] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='ExtractData'
+[2025-07-24 09:26:00] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 09:27:39] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='ExtractData'
+[2025-07-24 09:27:39] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 09:28:28] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='ExtractData'
+[2025-07-24 09:28:28] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 09:29:33] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='ExtractData'
+[2025-07-24 09:29:33] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 09:32:06] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='ExtractData'
+[2025-07-24 09:32:07] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 09:38:10] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 09:38:20] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 09:38:20] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-24 09:38:20] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='ExtractData'
+[2025-07-24 09:38:20] [ERROR] [RPC] Error reading resource template: 'str' object has no attribute 'structured_content'
+[2025-07-24 09:39:05] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 09:39:08] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 09:39:08] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-24 09:39:08] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='ExtractData'
+[2025-07-24 12:53:40] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 12:56:56] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 13:00:38] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 13:52:52] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 14:05:25] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-24 14:32:18] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 14:33:31] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 14:34:40] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 14:42:33] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 14:43:03] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 14:54:32] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 14:55:02] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 15:04:03] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 15:04:05] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 15:04:49] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 15:07:32] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 15:08:03] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 15:08:40] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 15:09:27] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 15:09:55] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-24 15:10:18] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP

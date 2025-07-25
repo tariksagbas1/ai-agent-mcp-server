@@ -1,6 +1,5 @@
 # consumer.py
 from service_core.logger import get_logger
-
 logger = get_logger(__name__)
 import pika
 import json

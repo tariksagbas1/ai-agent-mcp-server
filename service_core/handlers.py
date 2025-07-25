@@ -1,4 +1,4 @@
-from registry import register
+from service_core.registry import register
 
 @register("LLMChat")
 def add(a, b):

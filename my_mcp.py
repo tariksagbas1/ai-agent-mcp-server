@@ -20,6 +20,8 @@ from pathlib import Path
 from utils import *
 from service_core.rpc_client import rpc_call
 from context import *
+from service_core.bootstrap import bootstrap_mcp
+from fastmcp.client import Client
 
 import openai
 import pandas as pd
@@ -50,7 +52,6 @@ def external_function_call(tool_name, **kwargs):
     } 
 
     message_code = tool_name 
-
     # Mesajı gönder
     response = rpc_call(
         message_code=message_code,
@@ -59,6 +60,8 @@ def external_function_call(tool_name, **kwargs):
     )
     if "IsFeasible" in response:
         response["IsFeasible"] = response["IsFeasible"] == 1
+    
+    print(f"RPC Response : {response}")
 
     return response
 
@@ -83,8 +86,11 @@ def external_data_extract_call(table_name, **kwargs) -> pd.DataFrame:
 
     data = rpc_call("ExtractData", json_body, headers, 60)
 
+    if (data.get("Error")):
+        return data
+
     if (data):
-        df = pd.DataFrame(data['Objects'])
+        df = pd.DataFrame(data.get('Objects'))
         #rename_columns(df)
         for col in df.columns:
             if 'date' in col.lower() or 'time' in col.lower():
@@ -198,8 +204,6 @@ def Extract_{table_name}(scenario_code: str, username: str):
         namespace = {"datetime": datetime, "external_data_extract_call": external_data_extract_call} # Generate a namespace
         exec(function_code, namespace) # Save function definition to namespace
         resource_func = namespace[f"Extract_{table_name}"] # Point to the function definition
-
-        #uri_params = "/".join([f"{{{field}}}" for field in fields.keys()])
         
         uri_params = "/".join([f"{{{arg}}}" for arg in ['scenario_code', 'username']])
         resource_uri = f"resource://Extract_{table_name}/{uri_params}"
@@ -225,9 +229,8 @@ def read_idep_config():
     llm_credentials = None
     llm_tools = None
 
+
     for service in deployment_config['Services']:
-        print("****************************")
-        print("Service Code:", service['ServiceCode'])
         if service['ServiceCode'] == service_code:
             for rpc_messages_server in service['RPCMessages_Server']:
 
@@ -279,9 +282,27 @@ if __name__ == "__main__":
     
 
     all_tools = asyncio.run(mcp.get_tools())
-    #print("Registered tools:", all_tools)
-    all_resources = asyncio.run(mcp.get_resource_templates())
-    #print("Registered resources:", all_resources)
-    mcp.run(transport="http", port=8000, log_level="debug", host="0.0.0.0")
+    all_resource_templates = asyncio.run(mcp.get_resource_templates())
+
+    transformed_resource_templates = []
+    for resource_template in list(all_resource_templates.values()):
+        transformed_resource_templates.append({
+            "name" : resource_template.name,
+            "description" : resource_template.description,
+            "inputSchema" : resource_template.parameters,
+        })
+
+
+
+    transformed_tools = []
+    for tool in list(all_tools.values()):
+        transformed_tools.append({
+            "name" : tool.name,
+            "description" : tool.description,
+            "inputSchema" : tool.parameters,
+        })
+    
+    bootstrap_mcp(mcp, transformed_tools, transformed_resource_templates)
+    
 
 

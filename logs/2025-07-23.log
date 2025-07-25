@@ -1,0 +1,143 @@
+[2025-07-23 07:26:49] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-23 08:03:18] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-23 08:04:50] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-23 09:15:03] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-23 10:58:56] [INFO] ✅ All queues are now being listened to.
+[2025-07-23 11:01:22] [INFO] ✅ All queues are now being listened to.
+[2025-07-23 11:12:11] [INFO] ✅ All queues are now being listened to.
+[2025-07-23 11:13:22] [INFO] ✅ All queues are now being listened to.
+[2025-07-23 11:13:54] [INFO] ✅ All queues are now being listened to.
+[2025-07-23 11:15:25] [INFO] ✅ All queues are now being listened to.
+[2025-07-23 11:21:21] [INFO] ✅ All queues are now being listened to.
+[2025-07-23 11:27:12] [INFO] Listening to MCP
+[2025-07-23 11:27:12] [INFO] ✅ All queues are now being listened to.
+[2025-07-23 11:27:13] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-23 11:29:11] [INFO] ✅ All queues are now being listened to.
+[2025-07-23 11:29:12] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-23 12:10:40] [INFO] ✅ All queues are now being listened to.
+[2025-07-23 12:10:41] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-23 12:27:05] [INFO] ✅ All queues are now being listened to.
+[2025-07-23 12:27:07] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-23 12:27:18] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-23 12:27:18] [INFO] [RPC] Received message: {'CustomerName': '21', 'ItemName': '123', 'Priority': 123, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '1123'}
+[2025-07-23 12:27:18] [ERROR] [RPC] Error processing message: Invalid message format. 'message_code' and 'payload' are required.
+[2025-07-23 12:40:55] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-23 12:44:07] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-23 12:44:08] [INFO] [RPC] Received message: {'CustomerName': '123', 'ItemName': '123', 'Priority': 122, 'Quantity': 122, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}
+[2025-07-23 12:44:08] [ERROR] [RPC] Error processing message: Invalid message format. 'message_code' and 'payload' are required.
+[2025-07-23 12:45:00] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-23 12:46:08] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-23 12:47:58] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-23 12:58:45] [ERROR] [RPC] Error processing message: Expecting value: line 1 column 1 (char 0)
+[2025-07-23 13:00:53] [ERROR] [RPC] Error processing message: Expecting value: line 1 column 1 (char 0)
+[2025-07-23 13:01:27] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-23 13:01:29] [INFO] [RPC] Received message: b'AJShdashd'
+[2025-07-23 13:01:29] [ERROR] [RPC] Error processing message: Expecting value: line 1 column 1 (char 0)
+[2025-07-23 13:01:58] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-23 13:02:00] [INFO] [RPC] Received message: <BasicProperties(['app_id=test.app', 'content_type=application/protobuf', 'correlation_id=00000000-0000-0000-0000-000000000002', 'delivery_mode=2', "headers={'version': '1.0'}", 'message_id=00000000-0000-0000-0000-000000000001', 'timestamp=1710689760', 'type=request.activatelistener'])>
+[2025-07-23 13:02:00] [ERROR] [RPC] Error processing message: Expecting value: line 1 column 1 (char 0)
+[2025-07-23 13:13:13] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-23 13:16:42] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-23 13:22:07] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-23 13:34:24] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-23 13:35:01] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-23 13:37:25] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-23 13:58:02] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-23 13:58:21] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-23 14:05:35] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-23 14:05:53] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-23 14:09:29] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-23 14:09:29] [INFO] [RPC] Received message: <BasicProperties(['correlation_id=71858d79-074b-41a0-8f1a-c38e2473c12e', "headers={'FunctionName': 'OrderSimulation'}", 'reply_to=amq.gen-OvfyF6xsfDfoqPgSoxA5Iw'])>
+[2025-07-23 14:09:29] [INFO] [RPC] Received message: {'CustomerName': '123', 'ItemName': '123', 'Priority': 1, 'Quantity': 0, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}
+[2025-07-23 14:09:29] [ERROR] [RPC] Error processing message: Invalid message format. 'message_code' and 'payload' are required.
+[2025-07-23 14:09:29] [INFO] [RPC] Received message: <BasicProperties(['correlation_id=6c355e01-25df-41c8-bb90-209b0693ca7e', "headers={'FunctionName': 'OrderSimulation'}", 'reply_to=amq.gen-Pdh5GnR3CUw6ytYEhXup-w'])>
+[2025-07-23 14:09:29] [INFO] [RPC] Received message: {'CustomerName': '123', 'ItemName': '123', 'Priority': 1, 'Quantity': 0, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}
+[2025-07-23 14:09:29] [ERROR] [RPC] Error processing message: Invalid message format. 'message_code' and 'payload' are required.
+[2025-07-23 14:09:29] [INFO] [RPC] Received message: <BasicProperties(['correlation_id=576cf18f-47b4-49e5-b61f-99e981d61d69', "headers={'Test': 'Test'}", 'reply_to=amq.gen-wn6LlbX1JYU80MgVGxoBQQ'])>
+[2025-07-23 14:09:29] [INFO] [RPC] Received message: {'Test': 'Test'}
+[2025-07-23 14:09:29] [ERROR] [RPC] Error processing message: Invalid message format. 'message_code' and 'payload' are required.
+[2025-07-23 14:09:29] [INFO] [RPC] Received message: <BasicProperties(['correlation_id=5c55d624-377f-4679-b209-be124fdbd808', "headers={'Test': 'Test'}", 'reply_to=amq.gen-4STzaoFeryMmUcVaV0nztg'])>
+[2025-07-23 14:09:29] [INFO] [RPC] Received message: {'Test': 'Test'}
+[2025-07-23 14:09:29] [ERROR] [RPC] Error processing message: Invalid message format. 'message_code' and 'payload' are required.
+[2025-07-23 14:09:29] [INFO] [RPC] Received message: <BasicProperties(['correlation_id=d8ab5af4-9a56-49b2-859b-f6343ed0dbc2', "headers={'Test': 'Test'}", 'reply_to=amq.gen-eT72mWE7pR6IzH5HmJiTAA'])>
+[2025-07-23 14:09:29] [INFO] [RPC] Received message: {'Test': 'Test'}
+[2025-07-23 14:09:29] [ERROR] [RPC] Error processing message: Invalid message format. 'message_code' and 'payload' are required.
+[2025-07-23 14:09:29] [INFO] [RPC] Received message: <BasicProperties(['correlation_id=147d8848-5a54-4e15-9eb2-19e76cdcd130', "headers={'Test': 'Test'}", 'reply_to=amq.gen-c1Igcdq4w_9f2ie9D1D9nA'])>
+[2025-07-23 14:09:29] [INFO] [RPC] Received message: {'get_tools': 'get_tools'}
+[2025-07-23 14:09:29] [ERROR] [RPC] Error processing message: Invalid message format. 'message_code' and 'payload' are required.
+[2025-07-23 14:13:56] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-23 14:14:09] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-23 14:14:54] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-23 14:14:54] [INFO] [RPC] Received props: <BasicProperties(['correlation_id=fbe0e1f6-1fad-42d5-8527-3b2db3496b7d', "headers={'Test': 'Test'}", 'reply_to=amq.gen-x18qOoeANUb6iTCgWSLzGQ'])>
+[2025-07-23 14:14:54] [INFO] [RPC] Received message: {'get_tools': 'get_tools'}
+[2025-07-23 14:14:54] [ERROR] [RPC] Error processing message: Invalid message format. 'message_code' and 'payload' are required.
+[2025-07-23 14:15:38] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-23 14:15:47] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-23 14:15:47] [INFO] [RPC] Received props: <class 'pika.spec.BasicProperties'>
+[2025-07-23 14:15:47] [INFO] [RPC] Received message: {'get_tools': 'get_tools'}
+[2025-07-23 14:15:47] [ERROR] [RPC] Error processing message: Invalid message format. 'message_code' and 'payload' are required.
+[2025-07-23 14:18:14] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-23 14:18:18] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-23 14:18:18] [INFO] [RPC] Received props: ['CLASS', 'FLAG_APP_ID', 'FLAG_CLUSTER_ID', 'FLAG_CONTENT_ENCODING', 'FLAG_CONTENT_TYPE', 'FLAG_CORRELATION_ID', 'FLAG_DELIVERY_MODE', 'FLAG_EXPIRATION', 'FLAG_HEADERS', 'FLAG_MESSAGE_ID', 'FLAG_PRIORITY', 'FLAG_REPLY_TO', 'FLAG_TIMESTAMP', 'FLAG_TYPE', 'FLAG_USER_ID', 'INDEX', 'NAME', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__firstlineno__', '__format__', '__ge__', '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__static_attributes__', '__str__', '__subclasshook__', '__weakref__', 'app_id', 'cluster_id', 'content_encoding', 'content_type', 'correlation_id', 'decode', 'delivery_mode', 'encode', 'expiration', 'headers', 'message_id', 'priority', 'reply_to', 'timestamp', 'type', 'user_id']
+[2025-07-23 14:18:18] [INFO] [RPC] Received message: {'get_tools': 'get_tools'}
+[2025-07-23 14:18:18] [ERROR] [RPC] Error processing message: Invalid message format. 'message_code' and 'payload' are required.
+[2025-07-23 14:28:32] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-23 14:28:37] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-23 14:28:37] [INFO] [RPC] Received props: ['CLASS', 'FLAG_APP_ID', 'FLAG_CLUSTER_ID', 'FLAG_CONTENT_ENCODING', 'FLAG_CONTENT_TYPE', 'FLAG_CORRELATION_ID', 'FLAG_DELIVERY_MODE', 'FLAG_EXPIRATION', 'FLAG_HEADERS', 'FLAG_MESSAGE_ID', 'FLAG_PRIORITY', 'FLAG_REPLY_TO', 'FLAG_TIMESTAMP', 'FLAG_TYPE', 'FLAG_USER_ID', 'INDEX', 'NAME', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__firstlineno__', '__format__', '__ge__', '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__static_attributes__', '__str__', '__subclasshook__', '__weakref__', 'app_id', 'cluster_id', 'content_encoding', 'content_type', 'correlation_id', 'decode', 'delivery_mode', 'encode', 'expiration', 'headers', 'message_id', 'priority', 'reply_to', 'timestamp', 'type', 'user_id']
+[2025-07-23 14:28:37] [INFO] *
+[2025-07-23 14:28:37] [INFO] *
+[2025-07-23 14:28:37] [INFO] *
+[2025-07-23 14:28:37] [INFO] [RPC] Received message: {'message_code': 'MCP'}
+[2025-07-23 14:33:30] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-23 14:34:43] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-23 14:34:43] [INFO] [RPC] Received props: ['CLASS', 'FLAG_APP_ID', 'FLAG_CLUSTER_ID', 'FLAG_CONTENT_ENCODING', 'FLAG_CONTENT_TYPE', 'FLAG_CORRELATION_ID', 'FLAG_DELIVERY_MODE', 'FLAG_EXPIRATION', 'FLAG_HEADERS', 'FLAG_MESSAGE_ID', 'FLAG_PRIORITY', 'FLAG_REPLY_TO', 'FLAG_TIMESTAMP', 'FLAG_TYPE', 'FLAG_USER_ID', 'INDEX', 'NAME', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__firstlineno__', '__format__', '__ge__', '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__static_attributes__', '__str__', '__subclasshook__', '__weakref__', 'app_id', 'cluster_id', 'content_encoding', 'content_type', 'correlation_id', 'decode', 'delivery_mode', 'encode', 'expiration', 'headers', 'message_id', 'priority', 'reply_to', 'timestamp', 'type', 'user_id']
+[2025-07-23 14:34:43] [INFO] *
+[2025-07-23 14:34:43] [INFO] *
+[2025-07-23 14:34:43] [INFO] *
+[2025-07-23 14:34:43] [INFO] [RPC] Received message: {'message_code': 'MCP'}
+[2025-07-23 14:47:17] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-23 14:48:15] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-23 14:48:15] [INFO] [RPC] Received props: ['CLASS', 'FLAG_APP_ID', 'FLAG_CLUSTER_ID', 'FLAG_CONTENT_ENCODING', 'FLAG_CONTENT_TYPE', 'FLAG_CORRELATION_ID', 'FLAG_DELIVERY_MODE', 'FLAG_EXPIRATION', 'FLAG_HEADERS', 'FLAG_MESSAGE_ID', 'FLAG_PRIORITY', 'FLAG_REPLY_TO', 'FLAG_TIMESTAMP', 'FLAG_TYPE', 'FLAG_USER_ID', 'INDEX', 'NAME', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__firstlineno__', '__format__', '__ge__', '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__static_attributes__', '__str__', '__subclasshook__', '__weakref__', 'app_id', 'cluster_id', 'content_encoding', 'content_type', 'correlation_id', 'decode', 'delivery_mode', 'encode', 'expiration', 'headers', 'message_id', 'priority', 'reply_to', 'timestamp', 'type', 'user_id']
+[2025-07-23 14:48:15] [INFO] *
+[2025-07-23 14:48:15] [INFO] *
+[2025-07-23 14:48:15] [INFO] *
+[2025-07-23 14:48:15] [INFO] [RPC] Received message: {'message_code': 'MCP'}
+[2025-07-23 14:48:15] [ERROR] [RPC] Error processing message: cannot access local variable 'result' where it is not associated with a value
+[2025-07-23 14:49:16] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-23 14:49:16] [INFO] [RPC] Received props: ['CLASS', 'FLAG_APP_ID', 'FLAG_CLUSTER_ID', 'FLAG_CONTENT_ENCODING', 'FLAG_CONTENT_TYPE', 'FLAG_CORRELATION_ID', 'FLAG_DELIVERY_MODE', 'FLAG_EXPIRATION', 'FLAG_HEADERS', 'FLAG_MESSAGE_ID', 'FLAG_PRIORITY', 'FLAG_REPLY_TO', 'FLAG_TIMESTAMP', 'FLAG_TYPE', 'FLAG_USER_ID', 'INDEX', 'NAME', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__firstlineno__', '__format__', '__ge__', '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__static_attributes__', '__str__', '__subclasshook__', '__weakref__', 'app_id', 'cluster_id', 'content_encoding', 'content_type', 'correlation_id', 'decode', 'delivery_mode', 'encode', 'expiration', 'headers', 'message_id', 'priority', 'reply_to', 'timestamp', 'type', 'user_id']
+[2025-07-23 14:49:16] [INFO] *
+[2025-07-23 14:49:16] [INFO] *
+[2025-07-23 14:49:16] [INFO] *
+[2025-07-23 14:49:16] [INFO] [RPC] Received message: {'message_code': 'tools'}
+[2025-07-23 14:49:16] [ERROR] [RPC] Error processing message: Object of type FunctionTool is not JSON serializable
+[2025-07-23 14:50:49] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-23 15:12:14] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-23 15:12:14] [INFO] [RPC] Received props: ['CLASS', 'FLAG_APP_ID', 'FLAG_CLUSTER_ID', 'FLAG_CONTENT_ENCODING', 'FLAG_CONTENT_TYPE', 'FLAG_CORRELATION_ID', 'FLAG_DELIVERY_MODE', 'FLAG_EXPIRATION', 'FLAG_HEADERS', 'FLAG_MESSAGE_ID', 'FLAG_PRIORITY', 'FLAG_REPLY_TO', 'FLAG_TIMESTAMP', 'FLAG_TYPE', 'FLAG_USER_ID', 'INDEX', 'NAME', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__firstlineno__', '__format__', '__ge__', '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__static_attributes__', '__str__', '__subclasshook__', '__weakref__', 'app_id', 'cluster_id', 'content_encoding', 'content_type', 'correlation_id', 'decode', 'delivery_mode', 'encode', 'expiration', 'headers', 'message_id', 'priority', 'reply_to', 'timestamp', 'type', 'user_id']
+[2025-07-23 15:12:14] [INFO] *
+[2025-07-23 15:12:14] [INFO] *
+[2025-07-23 15:12:14] [INFO] *
+[2025-07-23 15:12:14] [INFO] [RPC] Received message: {'message_code': 'tools'}
+[2025-07-23 15:12:31] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-23 15:12:34] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-23 15:12:34] [INFO] [RPC] Received props: ['CLASS', 'FLAG_APP_ID', 'FLAG_CLUSTER_ID', 'FLAG_CONTENT_ENCODING', 'FLAG_CONTENT_TYPE', 'FLAG_CORRELATION_ID', 'FLAG_DELIVERY_MODE', 'FLAG_EXPIRATION', 'FLAG_HEADERS', 'FLAG_MESSAGE_ID', 'FLAG_PRIORITY', 'FLAG_REPLY_TO', 'FLAG_TIMESTAMP', 'FLAG_TYPE', 'FLAG_USER_ID', 'INDEX', 'NAME', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__firstlineno__', '__format__', '__ge__', '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__static_attributes__', '__str__', '__subclasshook__', '__weakref__', 'app_id', 'cluster_id', 'content_encoding', 'content_type', 'correlation_id', 'decode', 'delivery_mode', 'encode', 'expiration', 'headers', 'message_id', 'priority', 'reply_to', 'timestamp', 'type', 'user_id']
+[2025-07-23 15:12:34] [INFO] *
+[2025-07-23 15:12:34] [INFO] *
+[2025-07-23 15:12:34] [INFO] *
+[2025-07-23 15:12:34] [INFO] [RPC] Received message: {'message_code': 'tools'}
+[2025-07-23 15:13:34] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-23 15:13:34] [INFO] [RPC] Received props: ['CLASS', 'FLAG_APP_ID', 'FLAG_CLUSTER_ID', 'FLAG_CONTENT_ENCODING', 'FLAG_CONTENT_TYPE', 'FLAG_CORRELATION_ID', 'FLAG_DELIVERY_MODE', 'FLAG_EXPIRATION', 'FLAG_HEADERS', 'FLAG_MESSAGE_ID', 'FLAG_PRIORITY', 'FLAG_REPLY_TO', 'FLAG_TIMESTAMP', 'FLAG_TYPE', 'FLAG_USER_ID', 'INDEX', 'NAME', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__firstlineno__', '__format__', '__ge__', '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__static_attributes__', '__str__', '__subclasshook__', '__weakref__', 'app_id', 'cluster_id', 'content_encoding', 'content_type', 'correlation_id', 'decode', 'delivery_mode', 'encode', 'expiration', 'headers', 'message_id', 'priority', 'reply_to', 'timestamp', 'type', 'user_id']
+[2025-07-23 15:13:34] [INFO] *
+[2025-07-23 15:13:34] [INFO] *
+[2025-07-23 15:13:34] [INFO] *
+[2025-07-23 15:13:34] [INFO] [RPC] Received message: {'message_code': 'tools'}
+[2025-07-23 15:13:42] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-23 15:13:42] [INFO] [RPC] Received props: ['CLASS', 'FLAG_APP_ID', 'FLAG_CLUSTER_ID', 'FLAG_CONTENT_ENCODING', 'FLAG_CONTENT_TYPE', 'FLAG_CORRELATION_ID', 'FLAG_DELIVERY_MODE', 'FLAG_EXPIRATION', 'FLAG_HEADERS', 'FLAG_MESSAGE_ID', 'FLAG_PRIORITY', 'FLAG_REPLY_TO', 'FLAG_TIMESTAMP', 'FLAG_TYPE', 'FLAG_USER_ID', 'INDEX', 'NAME', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__firstlineno__', '__format__', '__ge__', '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__static_attributes__', '__str__', '__subclasshook__', '__weakref__', 'app_id', 'cluster_id', 'content_encoding', 'content_type', 'correlation_id', 'decode', 'delivery_mode', 'encode', 'expiration', 'headers', 'message_id', 'priority', 'reply_to', 'timestamp', 'type', 'user_id']
+[2025-07-23 15:13:42] [INFO] *
+[2025-07-23 15:13:42] [INFO] *
+[2025-07-23 15:13:42] [INFO] *
+[2025-07-23 15:13:42] [INFO] [RPC] Received message: {'message_code': 'tools'}
+[2025-07-23 15:14:23] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-23 15:14:25] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-23 15:14:25] [INFO] [RPC] Received message: {'message_code': 'tools'}
+[2025-07-23 17:15:16] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-23 17:16:35] [INFO] [RPC] Listening on RPC queue 'MCP'...

@@ -24,9 +24,6 @@ def resolve(service_list, message_code, service_code, allow_only_sendable=False,
 
     for section, key_name in sections:
         for entry in service.get(section, []):
-            print("key_name", key_name)
-            print("entry", entry)
-            print("message_code", message_code)
             if entry.get(key_name) != message_code:
                 continue
 
@@ -40,8 +37,8 @@ def resolve(service_list, message_code, service_code, allow_only_sendable=False,
             return {
                 "exchange": entry.get("MBExchangeName", ""),
                 "routing_key": next(iter(entry.get("RoutingKeyParameters", {}).values()), message_code),
-                #"routing_key": "ExtractData",
-                "host": entry.get("MBHost"),
+                "host": entry.get("MBHost", "localhost"),
+                #"host": "rabbitmq",
                 "vhost": entry.get("MBVirtualHostName"),
                 "port": entry.get("MBPort"),
                 "username": entry.get("MBUserName", DEFAULT_USERNAME),

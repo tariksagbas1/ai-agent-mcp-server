@@ -7,8 +7,8 @@ load_dotenv()
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-DEPLOYMENT_CODE = os.getenv("DEPLOYMENT_CODE")  
-SERVICE_CODE    = os.getenv("SERVICE_CODE")      
+DEPLOYMENT_CODE = os.getenv("DEPLOYMENT_CODE", "Tarik")  
+SERVICE_CODE    = os.getenv("SERVICE_CODE", "MCP")      
 IDEP_DIR = os.path.join(PROJECT_DIR, "configs")
 
 def load_services():

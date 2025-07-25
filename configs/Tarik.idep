@@ -423,15 +423,40 @@
             "Exchanges": [
               {
                 "ExchangeName": "Exc"
+              },
+              {
+                "ExchangeName": "MCP_Exchange"
               }
             ],
             "BindingsFromTemplate": [],
             "Bindings": [
               {
-                "BindingName": "ExtractData"
+                "BindingName": "OrderSimulation",
+                "DestinationType": "Queue",
+                "Source": "Exc",
+                "Destination": "OrderSimulation",
+                "RoutingKey": "OrderSimulation"
               },
               {
-                "BindingName": "OrderSimulation"
+                "BindingName": "ExtractData",
+                "DestinationType": "Queue",
+                "Source": "Exc",
+                "Destination": "ExtractData",
+                "RoutingKey": "ExtractData"
+              },
+              {
+                "BindingName": "MCP",
+                "DestinationType": "Queue",
+                "Source": "MCP_Exchange",
+                "Destination": "MCP",
+                "RoutingKey": "MCP"
+              },
+              {
+                "BindingName": "RemoveLLMAgent",
+                "DestinationType": "Queue",
+                "Source": "MCP_Exchange",
+                "Destination": "RemoveLLMAgent",
+                "RoutingKey": "RemoveLLMAgent"
               }
             ]
           }
@@ -480,7 +505,30 @@
           }
         }
       ],
-      "RPCMessages_Server": [],
+      "RPCMessages_Server": [
+        {
+          "RequestMessageCode": "MCP",
+          "ResponseMessageCode": "",
+          "InputQueues": [
+            {
+              "MBDeploymentCode": "Tarik",
+              "MBServiceCode": "MessageBroker",
+              "MBVirtualHostName": "tarik.sagbas",
+              "MBQueueName": "MCP",
+              "MBHost": "localhost",
+              "MBPort": 5672
+            },
+            {
+              "MBDeploymentCode": "Tarik",
+              "MBServiceCode": "MessageBroker",
+              "MBVirtualHostName": "tarik.sagbas",
+              "MBQueueName": "RemoveLLMAgent",
+              "MBHost": "localhost",
+              "MBPort": 5672
+            }
+          ]
+        }
+      ],
       "LLMServiceOptions": {
         "LLMServiceVersion": "mcp-test",
         "TemplateVersion": "1",

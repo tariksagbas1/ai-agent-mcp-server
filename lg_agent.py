@@ -18,8 +18,8 @@ from langchain_core.messages import HumanMessage, AIMessage
 from fastmcp import Client
 from contextlib import asynccontextmanager
 from pydantic import create_model
-load_dotenv()
 
+load_dotenv()
 
 os.environ["LANGCHAIN_TRACING_V2"] = "true"
 os.environ["LANGCHAIN_ENDPOINT"] = "https://api.smith.langchain.com"
@@ -31,7 +31,8 @@ MCP_SERVER_URL = "http://127.0.0.1:8000/mcp/"
 CONFIG_FILE_PATH = "config/config.idep"
 
 memory = MemorySaver()
-llm = ChatOpenAI(openai_api_key=OPENAI_API_KEY, temperature=0, model="gpt-4o")
+model_name = "gpt-4o-mini"
+llm = ChatOpenAI(openai_api_key=OPENAI_API_KEY, temperature=0, model=model_name)
 tools = []
 
 
@@ -153,15 +154,15 @@ class State(TypedDict):
 # --- Build the StateGraph ---
 graph_builder = StateGraph(State)
 
-# def pick_tools_node(state: State):
-#     print("Getting tools...")
-#     user_prompt = state["messages"][-1].content
-#     # res = mcp_tool_call("pick_tools", {"user_prompt": user_prompt})
-#     # res = json.loads(res.get("content")[0].get("text")).get("result")
-#     # selected_tools = json.loads(res)
-#     # print(f"Selected Tools: {selected_tools}")
-#     state["allowed_tools"] = tools
-#     return state
+def pick_tools_node(state: State):
+    print("Getting tools...")
+    #user_prompt = state["messages"][-1].content
+    #res = mcp_tool_call("pick_tools", {"user_prompt": user_prompt})
+    #res = json.loads(res.get("content")[0].get("text")).get("result")
+    #selected_tools = json.loads(res)
+    #print(f"Selected Tools: {selected_tools}")
+    #state["allowed_tools"] = tools
+    return state
 
 def agent_node(state: State):
     print("Calling Agent...")
@@ -192,11 +193,11 @@ def agent_node(state: State):
         return state
 
 # Add nodes and edges as per docs
-# graph_builder.add_node("PICK_TOOLS", pick_tools_node)
+graph_builder.add_node("PICK_TOOLS", pick_tools_node)
 graph_builder.add_node("TRIGGER_AGENT", agent_node)
 
-# graph_builder.add_edge(START, "PICK_TOOLS")
-graph_builder.add_edge(START, "TRIGGER_AGENT")
+graph_builder.add_edge(START, "PICK_TOOLS")
+graph_builder.add_edge("PICK_TOOLS", "TRIGGER_AGENT")
 graph_builder.add_edge("TRIGGER_AGENT", END)
 
 graph = graph_builder.compile(checkpointer=memory)
@@ -240,26 +241,45 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# @app.post("/agent")
-# async def run_agent(req : Request):
-#     data = await req.json()
-#     session_id = data.get("session_id")
-#     question = data.get("question")
+@app.post("/all_tools")
+async def get_all_tools(req : Request):
+    global all_tools
+    transformed_tools = []
+    for tool in all_tools:
+        transformed_tools.append({
+            "name" : tool.name,
+            "description" : tool.description,
+            "inputSchema" : tool.inputSchema,
+        })
+    return {"response" : transformed_tools}
 
-#     print("User input:", question)
-#     print("Session ID:", session_id)
+@app.post("/call_tool")
+async def call_tool_endpoint(req: Request):
+    data = await req.json()
+    tool_name = data.get("tool_name")
+    arguments = data.get("arguments", {})
+    if not tool_name:
+        return {"error": "tool_name is required"}
+    async with Client(MCP_SERVER_URL) as client:
+        try:
+            result = await client.call_tool(tool_name, arguments)
+            return {"result": result}
+        except Exception as e:
+            return {"error": str(e)}
 
-#     config = {"configurable": {"thread_id": session_id}}
-
-#     state = State()
-#     state["messages"] = [HumanMessage(content=question)]
-#     final_state = graph.invoke(state, config)
-#     agent_response = final_state["messages"][-1].content
-#     return {"response": agent_response}
+@app.post("/all_resource_templates")
+async def get_all_resource_templates(req : Request):
+    async with Client(MCP_SERVER_URL) as client:
+        resource_templates = await client.list_resource_templates()
+    print(resource_templates)
     
+    return {"result": resource_templates}
 
-def run_agent(req):
-    data = req
+
+
+@app.post("/agent")
+async def run_agent(req : Request):
+    data = await req.json()
     session_id = data.get("session_id")
     question = data.get("question")
 
@@ -277,8 +297,7 @@ def run_agent(req):
 
 
 
+
 if __name__ == "__main__":
-    #uvicorn.run("lg_agent:app", host="0.0.0.0", port=8080, reload=True)
-    run_agent({"session_id": "test_session", "question": "fgdfgfsfsdff ?"})
-
-
+    load_dotenv()
+    uvicorn.run("lg_agent:app", host="0.0.0.0", port=8080, reload=True)

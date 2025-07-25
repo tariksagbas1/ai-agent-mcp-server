@@ -1,9 +1,9 @@
 import json
-from config import load_services
-from router import resolve
-from rpc_client import rpc_call
-from produced import send_produced
-import handlers
+from service_core.config import load_services
+from service_core.router import resolve
+from service_core.rpc_client import rpc_call
+from service_core.produced import send_produced
+import service_core.handlers
 
 def send_message(message: dict, idep_dir: str):
     """

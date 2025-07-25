@@ -1,12 +1,12 @@
 import json
-from logger import get_logger
+from service_core.logger import get_logger
 
 logger = get_logger(__name__)
 import pika
-from rabbitmq_utils import get_connection_parameters
+from service_core.rabbitmq_utils import get_connection_parameters
 import time
-from router import resolve
-from config import load_services
+from service_core.router import resolve
+from service_core.config import load_services
 
 def send_produced(message: dict, idep_dir: str, max_attempts=3, retry_interval=2):
     service_list = load_services(message["service_filename"], idep_dir)

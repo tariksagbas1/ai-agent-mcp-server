@@ -9,7 +9,7 @@ import handlers
 
 # bootstrap("Test_Cakar", "LLM", "idep")
 
-from bootstrap import bootstrap
+from bootstrap import bootstrap_mcp
 
 if __name__ == "__main__":
-    bootstrap()
+    bootstrap_mcp()
