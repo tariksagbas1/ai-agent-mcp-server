@@ -1,0 +1,859 @@
+{
+  "DeploymentCode": "FurkanLocale",
+  "DraftStatus": 0,
+  "DeployStatus": 1,
+  "Deleted": 0,
+  "Services": [
+    {
+      "ServiceCode": "LLM",
+      "ServiceTemplateCode": "LLM_ODP",
+      "ServiceType": 7,
+      "AgentCode": "Furkan",
+      "ServiceParameters": {},
+      "ICMOptions": {
+        "StartMode": "Auto",
+        "ICRONQueryTimeout": 5000,
+        "ICRONShutdownTimeout": 2,
+        "UpdatePolicy": 0
+      },
+      "ConsumedMessages": [],
+      "ProducedMessages": [],
+      "RPCMessages_Client": [
+        {
+          "RequestMessageCode": "ODP",
+          "ResponseMessageCode": "",
+          "MBDeploymentCode": "FurkanLocale",
+          "MBServiceCode": "MB",
+          "MBVirtualHostName": "furkan.canturk",
+          "MBHost": "kubernetes.docker.internal",
+          "MBPort": 5672,
+          "TimeoutDuration": 600,
+          "RoutingKeyParameters": {
+            "ExtractData ": "ExtractData"
+          }
+        }
+      ],
+      "RPCMessages_Server": [
+        {
+          "RequestMessageCode": "LLMChatRequest",
+          "ResponseMessageCode": "LLMChatResponse",
+          "InputQueues": [
+            {
+              "MBDeploymentCode": "FurkanLocale",
+              "MBServiceCode": "MB",
+              "MBVirtualHostName": "furkan.canturk",
+              "MBQueueName": "LLMChat",
+              "MBHost": "kubernetes.docker.internal",
+              "MBPort": 5672
+            }
+          ]
+        },
+        {
+          "RequestMessageCode": "InitializeLLMAgentRequest",
+          "ResponseMessageCode": "InitializeLLMAgentResponse",
+          "InputQueues": [
+            {
+              "MBDeploymentCode": "FurkanLocale",
+              "MBServiceCode": "MB",
+              "MBVirtualHostName": "furkan.canturk",
+              "MBQueueName": "InitializeLLMAgent",
+              "MBHost": "kubernetes.docker.internal",
+              "MBPort": 5672
+            }
+          ]
+        },
+        {
+          "RequestMessageCode": "RemoveLLMAgentRequest",
+          "ResponseMessageCode": "RemoveLLMAgentResponse",
+          "InputQueues": [
+            {
+              "MBDeploymentCode": "FurkanLocale",
+              "MBServiceCode": "MB",
+              "MBVirtualHostName": "furkan.canturk",
+              "MBQueueName": "RemoveLLMAgent",
+              "MBHost": "kubernetes.docker.internal",
+              "MBPort": 5672
+            }
+          ]
+        }
+      ],
+      "LLMServiceOptions": {
+        "LLMServiceVersion": "0.0.15-dev",
+        "TemplateVersion": "1",
+        "LLMTools": {
+          "Functions": {
+            "OrderSimulation": {
+              "description": "It simulates a customer order and determines whether the order can be satisfied. Date format: %Y-%m-%d %H:%M:%S. Default line status (or status): \u0027Confirmed\u0027. Default priority is 1.",
+              "constants": {
+                "ScenarioCode": "string",
+                "UserName": "string",
+                "InventoryCode": "string"
+              },
+              "params": {
+                "CustomerName": "string",
+                "ItemName": "string",
+                "Priority": "integer",
+                "Quantity": "integer",
+                "Date": "string",
+                "LineStatus": "string"
+              },
+              "returns": {
+                "IsFeasible": "boolean"
+              }
+            }
+          },
+          "DBSchemas": [
+            {
+              "Inventory": {
+                "Description": "",
+                "PrimaryKeys": [
+                  "InventoryCode"
+                ],
+                "Fields": {
+                  "CategoryCode": "text",
+                  "DailySupplyRate": "real",
+                  "InventoryCode": "text",
+                  "InventoryID": "integer",
+                  "InventoryType": "text",
+                  "ItemCode": "text",
+                  "LeadTime": "real",
+                  "MacroFamilyCode": "text",
+                  "MaximumInventory": "real",
+                  "MinimumInventory": "real",
+                  "PremiumLeadTime": "integer",
+                  "ProductFamilyCode": "text",
+                  "ReliabilityCategory": "text",
+                  "SafetyInventory": "real"
+                }
+              }
+            },
+            {
+              "SalesItem": {
+                "Description": "",
+                "PrimaryKeys": [
+                  "SalesItemCode"
+                ],
+                "Fields": {
+                  "CustomerCode": "text",
+                  "Region": "text",
+                  "Country": "text",
+                  "InventoryCode": "text",
+                  "ItemCode": "text",
+                  "SalesDate": "datetime",
+                  "SalesItemID": "integer",
+                  "SalesQuantity": "real",
+                  "SalesPrice": "real"
+                }
+              }
+            },
+            {
+              "CustomerOrderItem": {
+                "Description": "",
+                "PrimaryKeys": [
+                  "CustomerCode",
+                  "ItemCode"
+                ],
+                "Fields": {
+                  "CustomerName": "text",
+                  "CustomerCode": "text",
+                  "ItemCode": "text",
+                  "OrderStatus": "text",
+                  "OrderPriority": "text",
+                  "RequestedQuantity": "real",
+                  "DeliveredQuantity": "real",
+                  "RequestedDueDate": "datetime",
+                  "DeliveryDueDate": "datetime",
+                  "DueDate": "datetime"
+                }
+              }
+            },
+            {
+              "Customer": {
+                "Description": "",
+                "PrimaryKeys": [
+                  "CustomerCode"
+                ],
+                "Fields": {
+                  "CustomerCode": "text",
+                  "CustomerName": "text",
+                  "Region": "text",
+                  "Country": "text",
+                  "ReliabilityCategory": "text",
+                  "SalesChannelCode": "text",
+                  "OTIFPromised": "real",
+                  "OTIFRequested": "real",
+                  "RevenuePercent": "real",
+                  "TotalOrders": "real",
+                  "TotalRevenue": "real"
+                }
+              }
+            }
+          ],
+          "SystemPrompt": "Note that OTIF means On-Time-In-Full and it is a percentage value.\n Order Priority values are \u0027High\u0027, \u0027Medium\u0027, and \u0027Low\u0027.\n There can be multiple sales for the same item on the same date, so, you may need to aggregate them.\n Do not forget to sort data based on date before plotting a time line chart.\n Orders data include multiple entries for the same customer.  Remember to aggregate them for customer-order analysis questions.\n The \u0027Code\u0027 columns refer to foreign or primary keys.\n So you may need to merge / join dataframes based on \u0027Code\u0027 columns.\n If user asks an explanation, you should give a text-based response."
+        },
+        "LLMCredentials": [
+          {
+            "Name": "openai",
+            "APIKey": "sk-svcacct-a-Ix-jI65MBCa5AB00R2SNmHfJSRlATVgJos0i1P2ohEEUPoU6XU0IDb1oBlycNaoT3BlbkFJ_JXwhHHKi6yKH2ZNupTd179lGUNjNsEnjgCCgTgLh21ZHqejEhWOPDeHNGQNXuSPwA"
+          }
+        ]
+      }
+    },
+    {
+      "ServiceCode": "MB",
+      "ServiceTemplateCode": "RabbitMQ",
+      "ServiceType": 4,
+      "AgentCode": "Furkan",
+      "ServiceParameters": {},
+      "ICMOptions": {
+        "StartMode": "Auto",
+        "ICRONQueryTimeout": 5000,
+        "ICRONShutdownTimeout": 2,
+        "UpdatePolicy": 0
+      },
+      "ConsumedMessages": [],
+      "ProducedMessages": [],
+      "RPCMessages_Client": [],
+      "RPCMessages_Server": [],
+      "MessageBrokerOptions": {
+        "RabbitMQImage": "rabbitmq:4.0.9-management",
+        "Host": "kubernetes.docker.internal",
+        "Port": 5672,
+        "ManagementPort": 15672,
+        "AdminUser": "furkan.canturk",
+        "AdminPassword": "furkan.canturk",
+        "TemplateVersion": "1",
+        "TimeZone": "UTC",
+        "Users": [
+          {
+            "DeploymentCode": "FurkanLocale",
+            "ServiceCode": "LLM",
+            "NumberOfInstances": 1,
+            "Credentials": [
+              {
+                "Username": "LLM_0@FurkanLocale",
+                "Password": "LLM_0@FurkanLocale"
+              }
+            ]
+          },
+          {
+            "DeploymentCode": "FurkanLocale",
+            "ServiceCode": "CloudAPI_LLM",
+            "NumberOfInstances": 1,
+            "Credentials": [
+              {
+                "Username": "CloudAPI_LLM_0@FurkanLocale",
+                "Password": "CloudAPI_LLM_0@FurkanLocale"
+              }
+            ]
+          },
+          {
+            "DeploymentCode": "FurkanLocale",
+            "ServiceCode": "ODP",
+            "NumberOfInstances": 1,
+            "Credentials": [
+              {
+                "Username": "ODP_0@FurkanLocale",
+                "Password": "ODP_0@FurkanLocale"
+              }
+            ]
+          }
+        ],
+        "VirtualHosts": [
+          {
+            "MBVirtualHostName": "melih.poyraz",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "melihQueue"
+              }
+            ],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "Platform",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "DS"
+              },
+              {
+                "QueueName": "Server1"
+              },
+              {
+                "QueueName": "Optimization"
+              },
+              {
+                "QueueName": "DataManager"
+              },
+              {
+                "QueueName": "DS-Backup"
+              }
+            ],
+            "Queues": [],
+            "ExchangesFromTemplate": [
+              {
+                "ExchangeName": "Timeout"
+              }
+            ],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "/",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "DS"
+              },
+              {
+                "QueueName": "Server1"
+              },
+              {
+                "QueueName": "DataManager"
+              },
+              {
+                "QueueName": "Mattel_CCDP"
+              },
+              {
+                "QueueName": "Mattel_SDP"
+              },
+              {
+                "QueueName": "Mattel_SDP2"
+              },
+              {
+                "QueueName": "Mattel_SDP3"
+              },
+              {
+                "QueueName": "Mattel_UM"
+              },
+              {
+                "QueueName": "Mattel_Consolidation"
+              },
+              {
+                "QueueName": "Mattel_WF"
+              },
+              {
+                "QueueName": "Mattel_Integrator"
+              },
+              {
+                "QueueName": "CloudAPI_Platform"
+              }
+            ],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "beyza.tozman",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "Server1"
+              },
+              {
+                "QueueName": "DS"
+              },
+              {
+                "QueueName": "DataManager"
+              },
+              {
+                "QueueName": "beyzaQueue"
+              },
+              {
+                "QueueName": "Beyza"
+              },
+              {
+                "QueueName": "BeyzaProMes"
+              }
+            ],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "omer.bekmezci",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "DS"
+              },
+              {
+                "QueueName": "Server1"
+              },
+              {
+                "QueueName": "Integrator"
+              },
+              {
+                "QueueName": "IBP"
+              },
+              {
+                "QueueName": "DDP"
+              },
+              {
+                "QueueName": "omerQueue"
+              },
+              {
+                "QueueName": "Auth"
+              },
+              {
+                "QueueName": "WFM"
+              }
+            ],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "murat.saka",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "muratds"
+              }
+            ],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "tolga.koc",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "CCDPFederation"
+              },
+              {
+                "QueueName": "DataDPFederation"
+              },
+              {
+                "QueueName": "ODPFederation"
+              },
+              {
+                "QueueName": "MDPFederation"
+              },
+              {
+                "QueueName": "PDPFederation"
+              },
+              {
+                "QueueName": "SDPFederation"
+              },
+              {
+                "QueueName": "MRPSolverFederation"
+              },
+              {
+                "QueueName": "FNSolverFederation"
+              },
+              {
+                "QueueName": "DS"
+              },
+              {
+                "QueueName": "Mattel_CCDP"
+              },
+              {
+                "QueueName": "Mattel_Integrator"
+              },
+              {
+                "QueueName": "Mattel_UM"
+              },
+              {
+                "QueueName": "Mattel_WF"
+              },
+              {
+                "QueueName": "Mattel_SDP"
+              },
+              {
+                "QueueName": "Mattel_SDP2"
+              },
+              {
+                "QueueName": "Mattel_SDP3"
+              },
+              {
+                "QueueName": "Mattel_Consolidation"
+              }
+            ],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "goktug.ibolar",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "goktugQueue"
+              },
+              {
+                "QueueName": "DS"
+              },
+              {
+                "QueueName": "Server1"
+              },
+              {
+                "QueueName": "DataManager"
+              }
+            ],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "ahmet.cakar",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "DS"
+              },
+              {
+                "QueueName": "Server1"
+              }
+            ],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "cenkhan.tarkan",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "DS"
+              }
+            ],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "berkay.sarialioglu",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "berkayTestQueue"
+              }
+            ],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "beyzagul.demir",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "Mattel_SDP3"
+              },
+              {
+                "QueueName": "Mattel_SDP2"
+              },
+              {
+                "QueueName": "Mattel_SDP"
+              },
+              {
+                "QueueName": "Mattel_CCDP"
+              },
+              {
+                "QueueName": "Mattel_Integrator"
+              },
+              {
+                "QueueName": "Mattel_UM"
+              }
+            ],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "kardelen.emirhan",
+            "QueuesFromTemplate": [
+              {
+                "QueueName": "DS"
+              },
+              {
+                "QueueName": "Server1"
+              },
+              {
+                "QueueName": "Optimization"
+              }
+            ],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "aytar.akdemir",
+            "QueuesFromTemplate": [],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "furkan.canturk",
+            "QueuesFromTemplate": [],
+            "Queues": [
+              {
+                "QueueName": "ExtractData"
+              },
+              {
+                "QueueName": "LLMChat"
+              },
+              {
+                "QueueName": "InitializeLLMAgent"
+              },
+              {
+                "QueueName": "RemoveLLMAgent"
+              },
+              {
+                "QueueName": "OrderSimulation"
+              }
+            ],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "bahadir.temel",
+            "QueuesFromTemplate": [],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          },
+          {
+            "MBVirtualHostName": "kaan.erol",
+            "QueuesFromTemplate": [],
+            "Queues": [],
+            "ExchangesFromTemplate": [],
+            "Exchanges": [],
+            "BindingsFromTemplate": [],
+            "Bindings": []
+          }
+        ]
+      }
+    },
+    {
+      "ServiceCode": "CloudAPI_LLM",
+      "ServiceTemplateCode": "CloudAPI_Furkan",
+      "ServiceType": 5,
+      "AgentCode": "Furkan",
+      "ServiceParameters": {},
+      "ICMOptions": {
+        "StartMode": "Auto",
+        "ICRONQueryTimeout": 5000,
+        "ICRONShutdownTimeout": 2,
+        "UpdatePolicy": 0
+      },
+      "ConsumedMessages": [],
+      "ProducedMessages": [],
+      "RPCMessages_Client": [
+        {
+          "RequestMessageCode": "RemoveLLMAgentRequest",
+          "ResponseMessageCode": "RemoveLLMAgentResponse",
+          "MBDeploymentCode": "FurkanLocale",
+          "MBServiceCode": "MB",
+          "MBVirtualHostName": "furkan.canturk",
+          "MBHost": "kubernetes.docker.internal",
+          "MBPort": 5672,
+          "TimeoutDuration": 30,
+          "RoutingKeyParameters": {
+            "RemoveLLMAgent": "RemoveLLMAgent"
+          }
+        },
+        {
+          "RequestMessageCode": "InitializeLLMAgentRequest",
+          "ResponseMessageCode": "InitializeLLMAgentResponse",
+          "MBDeploymentCode": "FurkanLocale",
+          "MBServiceCode": "MB",
+          "MBVirtualHostName": "furkan.canturk",
+          "MBHost": "kubernetes.docker.internal",
+          "MBPort": 5672,
+          "TimeoutDuration": 30,
+          "RoutingKeyParameters": {
+            "InitializeLLMAgent": "InitializeLLMAgent"
+          }
+        },
+        {
+          "RequestMessageCode": "LLMChatRequest",
+          "ResponseMessageCode": "LLMChatResponse",
+          "MBDeploymentCode": "FurkanLocale",
+          "MBServiceCode": "MB",
+          "MBVirtualHostName": "furkan.canturk",
+          "MBHost": "kubernetes.docker.internal",
+          "MBPort": 5672,
+          "TimeoutDuration": 600,
+          "RoutingKeyParameters": {
+            "LLMChat": "LLMChat"
+          }
+        },
+        {
+          "RequestMessageCode": "AuthorizationManagement",
+          "ResponseMessageCode": "",
+          "RoutingKeyParameters": {
+            "AuthorizationManagement": ""
+          }
+        }
+      ],
+      "RPCMessages_Server": [],
+      "CloudAPIOptions": {
+        "InitialServiceCode": "LLM",
+        "DefaultRPCClientMessageCode": "InitializeLLMAgentRequest",
+        "CloudAPIVersion": "3.24.41158.5004",
+        "ICChatUrl": "http://localhost:3000/home",
+        "UseKestrel": 1,
+        "KestrelURL": "http://localhost:5000",
+        "LauncherSettings": {
+          "AvailableServices": []
+        },
+        "AuthenticationTypes": {
+          "DefaultAuthType": 3,
+          "AzureAD": {
+            "IsEnabled": 1,
+            "TenantId": "5bdad0c7-bd1a-4f80-b457-6ffcee17fc6b",
+            "ApplicationId": "1ad81709-35f7-47a1-bbd3-11a15268d965",
+            "LoginHost": "https://login.microsoftonline.com/",
+            "GraphHost": "https://graph.microsoft.com/v1.0/"
+          }
+        },
+        "ICRONAPISettings": {},
+        "RestEndpoints": [],
+        "PortalOptions": {
+          "HostURL": "http://localhost:5000",
+          "Microfrontends": [
+            {
+              "InstanceCode": "Chatbot1",
+              "MFEHost": "https://mfe.icrontech.com/",
+              "MFEType": "chatbot",
+              "Version": "1_0_4",
+              "ModuleName": "aiChatbot",
+              "ComponentName": "./ChatBot",
+              "DisplayName": "ICRON Chatbot"
+            },
+            {
+              "InstanceCode": "Auth1",
+              "MFEHost": "https://mfe.icrontech.com/",
+              "MFEType": "authorization-management",
+              "Version": "1_0_1",
+              "ModuleName": "authorizationManagement",
+              "ComponentName": "./AuthorizationManagement",
+              "DisplayName": "Gui Authorization"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "ServiceCode": "ODP",
+      "ServiceTemplateCode": "ODP_5004",
+      "ServiceType": 0,
+      "AgentCode": "Furkan",
+      "ServiceParameters": {},
+      "ICMOptions": {
+        "StartMode": "Auto",
+        "ICRONQueryTimeout": 5000,
+        "ICRONShutdownTimeout": 2,
+        "UpdatePolicy": 0
+      },
+      "ConsumedMessages": [],
+      "ProducedMessages": [],
+      "RPCMessages_Client": [],
+      "RPCMessages_Server": [
+        {
+          "RequestMessageCode": "ODP",
+          "ResponseMessageCode": "",
+          "InputQueues": [
+            {
+              "MBDeploymentCode": "FurkanLocale",
+              "MBServiceCode": "MB",
+              "MBVirtualHostName": "furkan.canturk",
+              "MBQueueName": "ExtractData",
+              "MBHost": "kubernetes.docker.internal",
+              "MBPort": 5672
+            },
+            {
+              "MBDeploymentCode": "FurkanLocale",
+              "MBServiceCode": "MB",
+              "MBVirtualHostName": "furkan.canturk",
+              "MBQueueName": "LLMChat",
+              "MBHost": "kubernetes.docker.internal",
+              "MBPort": 5672
+            },
+            {
+              "MBDeploymentCode": "FurkanLocale",
+              "MBServiceCode": "MB",
+              "MBVirtualHostName": "furkan.canturk",
+              "MBQueueName": "InitializeLLMAgent",
+              "MBHost": "kubernetes.docker.internal",
+              "MBPort": 5672
+            },
+            {
+              "MBDeploymentCode": "FurkanLocale",
+              "MBServiceCode": "MB",
+              "MBVirtualHostName": "furkan.canturk",
+              "MBQueueName": "RemoveLLMAgent",
+              "MBHost": "kubernetes.docker.internal",
+              "MBPort": 5672
+            },
+            {
+              "MBDeploymentCode": "FurkanLocale",
+              "MBServiceCode": "MB",
+              "MBVirtualHostName": "furkan.canturk",
+              "MBQueueName": "OrderSimulation",
+              "MBHost": "kubernetes.docker.internal",
+              "MBPort": 5672
+            }
+          ]
+        }
+      ],
+      "ServerOptions": {
+        "Platform": "5004",
+        "DevelopmentMode": 1,
+        "DeploymentOptions": {
+          "WorkingFolderName": "Gartner_ODP_5004",
+          "MainModuleName": "GARTNER_ODP_5004",
+          "MainModuleReleaseVersion": "54.8.0.2.2",
+          "BinaryVersion": "54.24.39878.5004"
+        },
+        "DataSources": [
+          {
+            "DSName": "defaultds",
+            "AgentDSName": "defaultds",
+            "DSType": "SQLITE",
+            "ConnectionInfo": "GARTNER_ODP.icdb"
+          }
+        ],
+        "RuntimeOptions": {
+          "PersistToFile": 0,
+          "DumpType": 0,
+          "AuthenticationMode": 6,
+          "PreventAuthorization": 0,
+          "PreventWriteToDB": 0,
+          "BaseScenarioDBID_Business": 1,
+          "BaseScenarioDBID_Organization": 0,
+          "WEBAPIStrictErrorCheck": 0,
+          "WEBAPIStrictAccessibilityCheck": 0
+        },
+        "Tracing": {},
+        "GsamsOptions": {}
+      }
+    }
+  ]
+}

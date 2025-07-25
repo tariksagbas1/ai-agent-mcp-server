@@ -1,32 +1,22 @@
-FROM python:3.11-slim
+FROM continuumio/miniconda3
 
-# Set environment variables
-ENV PYTHONUNBUFFERED=1 \
-    DEBIAN_FRONTEND=noninteractive \
+ENV ENV_NAME=icron-llm-env \
+    PYTHONUNBUFFERED=1 \
     APP_DIR=/app
 
-# Install system dependencies
-RUN apt-get update && \
-    apt-get install -y curl bash build-essential && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+# Copy environment file and create environment
+COPY environment.yml /tmp/environment.yml
+RUN conda env create -f /tmp/environment.yml && conda clean -afy
 
-# Set working directory
+# Use bash and activate env in script
+SHELL ["/bin/bash", "-c"]
+
 WORKDIR $APP_DIR
+COPY . $APP_DIR
 
-# Copy requirements first to leverage Docker cache
-COPY requirements.txt .
-
-# Install Python dependencies
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
-
-# Copy the rest of the application
-COPY . .
-
-# Create a startup script
 RUN echo '#!/bin/bash' > /start_service.sh && \
-    echo "python my_mcp.py" >> /start_service.sh && \
+    echo "source activate ${ENV_NAME}" >> /start_service.sh && \
+    echo "python ${APP_DIR}/service_core/bootstrap.py --task mcp" >> /start_service.sh && \
     chmod +x /start_service.sh
 
-# Run the service
 CMD ["/start_service.sh"]

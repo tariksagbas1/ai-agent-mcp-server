@@ -20,7 +20,7 @@ from pathlib import Path
 from utils import *
 from service_core.rpc_client import rpc_call
 from context import *
-from service_core.bootstrap import bootstrap_mcp
+from service_core.config import load_services
 from fastmcp.client import Client
 
 import openai
@@ -42,11 +42,9 @@ class LoggingMiddleware(Middleware):
 
 
 # Helper Functions
-
 def external_function_call(tool_name, **kwargs):
 
-    icron_func_call_input = kwargs
-    print("icron_func_call_input", icron_func_call_input)
+    
     headers = {
         'FunctionName': tool_name
     } 
@@ -55,13 +53,13 @@ def external_function_call(tool_name, **kwargs):
     # Mesajı gönder
     response = rpc_call(
         message_code=message_code,
-        payload=icron_func_call_input,
+        payload=kwargs,
         headers = headers
     )
     if "IsFeasible" in response:
         response["IsFeasible"] = response["IsFeasible"] == 1
     
-    print(f"RPC Response : {response}")
+    print(f"[RPC] Tool Call Response : {response}")
 
     return response
 
@@ -212,97 +210,48 @@ def Extract_{table_name}(scenario_code: str, username: str):
         mcp.resource(resource_uri)(resource_func)
 
 
-def read_idep_config():
 
-    deployment_config = get_deployment_config()
+mcp = FastMCP(name="Icron MCP Server", instructions="This is a simple MCP server that serves the Icron company.", stateless_http=True)
 
-    service_code = get_service_code()
-    deployment_code = get_deployment_code()
+mcp.add_middleware(LoggingMiddleware())
 
-    username = f"{service_code}_0@{deployment_code}"
-    password = f"{service_code}_0@{deployment_code}"
+service_code = get_service_code()
+deployment_code = get_deployment_code()
 
-    set_rabbitmq_credentials(username, password)
+username = f"{service_code}_0@{deployment_code}"
+password = f"{service_code}_0@{deployment_code}"
 
-    mb_queues = {}
-    rpc_client_config = None
-    llm_credentials = None
-    llm_tools = None
+set_rabbitmq_credentials(username, password)
+mcp_service = load_services()
+tools = mcp_service.get('LLMServiceOptions').get('LLMTools', None)
+
+if not tools:
+    raise ValueError("No tools found")
+
+register_tools_from_idep(mcp, tools['Functions'])
+register_resources_from_idep(mcp, tools['DBSchemas'])
 
 
-    for service in deployment_config['Services']:
-        if service['ServiceCode'] == service_code:
-            for rpc_messages_server in service['RPCMessages_Server']:
+all_tools = asyncio.run(mcp.get_tools())
+all_resource_templates = asyncio.run(mcp.get_resource_templates())
 
-                if rpc_messages_server["RequestMessageCode"] == "LLMChatRequest":
-                    mb_queues["LLMChat"] = rpc_messages_server["InputQueues"]
+transformed_resource_templates = []
+for resource_template in list(all_resource_templates.values()):
+    transformed_resource_templates.append({
+        "name" : resource_template.name,
+        "description" : resource_template.description,
+        "inputSchema" : resource_template.parameters,
+    })
 
-                elif rpc_messages_server["RequestMessageCode"] == "InitializeLLMAgentRequest":
-                    mb_queues["InitializeLLMAgent"] = rpc_messages_server["InputQueues"]
 
-                elif rpc_messages_server["RequestMessageCode"] == "RemoveLLMAgentRequest":
-                    mb_queues["RemoveLLMAgent"] = rpc_messages_server["InputQueues"]
-            
-
-            llm_credentials = service['LLMServiceOptions']["LLMCredentials"]
-
-            llm_tools = service['LLMServiceOptions']["LLMTools"]
-
-            rpc_client_config = service['RPCMessages_Client'][0]
-
-            # Assuming only one LLM service config is available
-            break
-
-    set_config(mb_queues, rpc_client_config, llm_credentials, llm_tools)
-
-    return mb_queues
-
-if __name__ == "__main__":
+transformed_tools = []
+for tool in list(all_tools.values()):
+    transformed_tools.append({
+        "name" : tool.name,
+        "description" : tool.description,
+        "inputSchema" : tool.parameters,
+    })
     
-    mcp = FastMCP(name="Icron MCP Server", instructions="This is a simple MCP server that serves the Icron company.", stateless_http=True)
-
-    mcp.add_middleware(LoggingMiddleware())
-
-    _ = read_idep_config()
-    deployment_config = get_deployment_config()
-
-    service_code = get_service_code()
-    deployment_code = get_deployment_code()
-
-    username = f"{service_code}_0@{deployment_code}"
-    password = f"{service_code}_0@{deployment_code}"
-
-    set_rabbitmq_credentials(username, password)
-
-    api_key = get_llm_credentials()[0]['APIKey']
-    tools = get_llm_tools()
-
-    register_tools_from_idep(mcp, tools['Functions'])
-    register_resources_from_idep(mcp, tools['DBSchemas'])
-    
-
-    all_tools = asyncio.run(mcp.get_tools())
-    all_resource_templates = asyncio.run(mcp.get_resource_templates())
-
-    transformed_resource_templates = []
-    for resource_template in list(all_resource_templates.values()):
-        transformed_resource_templates.append({
-            "name" : resource_template.name,
-            "description" : resource_template.description,
-            "inputSchema" : resource_template.parameters,
-        })
-
-
-
-    transformed_tools = []
-    for tool in list(all_tools.values()):
-        transformed_tools.append({
-            "name" : tool.name,
-            "description" : tool.description,
-            "inputSchema" : tool.parameters,
-        })
-    
-    bootstrap_mcp(mcp, transformed_tools, transformed_resource_templates)
     
 
 

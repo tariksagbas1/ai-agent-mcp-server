@@ -27,13 +27,6 @@ def resolve(service_list, message_code, service_code, allow_only_sendable=False,
             if entry.get(key_name) != message_code:
                 continue
 
-            #input_queues = entry.get("MBQueueName", [])
-            
-           # if not input_queues:
-              #  raise ValueError(f"No InputQueues found for message_code '{message_code}' in section '{section}'.")
-
-            #queue_info = input_queues[0]
-
             return {
                 "exchange": entry.get("MBExchangeName", ""),
                 "routing_key": next(iter(entry.get("RoutingKeyParameters", {}).values()), message_code),

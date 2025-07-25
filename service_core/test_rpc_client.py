@@ -34,7 +34,7 @@ response = rpc_call_mcp(
 )
 """
 
-
+"""
 response = rpc_call_mcp(
     message_code = "MCP",
     payload = {
@@ -47,8 +47,8 @@ response = rpc_call_mcp(
     headers=headers,
     message_type = "command.read_resource_template"
 )
-
 """
+
 response = rpc_call_mcp(
     message_code = "MCP",
     payload = {
@@ -61,7 +61,7 @@ response = rpc_call_mcp(
     headers=headers,
     message_type = "query.tools"
 )
-"""
+
 print("✅ Returned Value:", response.get("body"))
 props = response.get("props")
 """
