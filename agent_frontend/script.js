@@ -35,23 +35,46 @@ async function test_mcp() {
         body: JSON.stringify(payload)
     });
     const data = await res.json();
-    console.log(data);
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    test_mcp();
-});
 
 let allTools = [];
 
 async function loadToolsSidebar() {
-    const res = await fetch('http://0.0.0.0:8080/all_tools', {
+    let payload = {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "tools/list",
+        "params" : {
+            "cursor": null,
+        },
+    }
+    const res = await fetch('http://0.0.0.0:8080/mcp_proxy', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({})
+        body: JSON.stringify(payload)
     });
-    const data = await res.json();
-    allTools = data.response || [];
+    
+    // Handle SSE response
+    console.log("RES IS :", res);
+    console.log("Content-Type:", res.headers.get('content-type'));
+    
+    if (res.headers.get('content-type')?.includes('text/event-stream')) {
+        const text = await res.text();
+        const lines = text.trim().split('\n');
+        for (const line of lines) {
+            if (line.startsWith('data: ')) { // Remove "data: " prefix
+                const jsonData = line.substring(6);
+                const data = JSON.parse(jsonData);
+                allTools = data.result?.tools || [];
+                break;
+            }
+        }
+    } else {
+        // Handle regular JSON response
+        const data = await res.json();
+        allTools = data.result || [];
+    }
+    console.log("ALL TOOLS ARE :", allTools);
     const toolList = document.getElementById('tool-list');
     toolList.innerHTML = '';
     allTools.forEach((tool, idx) => {
@@ -116,30 +139,43 @@ function showToolDetails(idx) {
         toolResultDiv.textContent = '...'; // loading indicator
         try {
             const payload = {
-                tool_name: tool.name,
-                arguments: args
+                "jsonrpc": "2.0",
+                "id": 1,
+                "method": "tools/call",
+                "params": {
+                    "name": tool.name,
+                    "arguments": args
+                }
             };
-            const res = await fetch('http://0.0.0.0:8080/call_tool', {
+            const res = await fetch('http://0.0.0.0:8080/mcp_proxy', {
                 method: 'POST',
                 headers: {
-                    'Accept': 'application/json',
+                    'Accept': 'application/json, text/event-stream',
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(payload)
             });
-            const data = await res.json();
-            // Show both content and structured_content if present
+            
+            // Handle SSE response
+            let data;
+            if (res.headers.get('content-type')?.includes('text/event-stream')) {
+                const text = await res.text();
+                const lines = text.trim().split('\n');
+                for (const line of lines) {
+                    if (line.startsWith('data: ')) {
+                        const jsonData = line.substring(6); 
+                        data = JSON.parse(jsonData);
+                        break;
+                    }
+                }
+            } else {
+                data = await res.json();
+            }
+            // Show the MCP tool result
             let html = '';
             if (data.result) {
-                if (data.result.content) {
-                    html += `<div style="margin-bottom:12px;"><strong>Content:</strong><br><pre style='white-space:pre-wrap;'>${typeof data.result.content === 'string' ? data.result.content : JSON.stringify(data.result.content, null, 2)}</pre></div>`;
-                }
-                if (data.result.structured_content) {
-                    html += `<div><strong>Structured Content:</strong><br><pre style='white-space:pre-wrap;'>${typeof data.result.structured_content === 'string' ? data.result.structured_content : JSON.stringify(data.result.structured_content, null, 2)}</pre></div>`;
-                }
-                if (!data.result.content && !data.result.structured_content) {
-                    html = `<pre style='white-space:pre-wrap;'>${typeof data.result === 'string' ? data.result : JSON.stringify(data.result, null, 2)}</pre>`;
-                }
+                // MCP tools return their result directly in data.result
+                html = `<pre style='white-space:pre-wrap;'>${typeof data.result === 'string' ? data.result : JSON.stringify(data.result, null, 2)}</pre>`;
                 toolResultDiv.innerHTML = html;
             } else if (data.error) {
                 toolResultDiv.textContent = '[Error] ' + data.error;

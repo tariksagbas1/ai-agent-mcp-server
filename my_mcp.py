@@ -33,6 +33,16 @@ class LoggingMiddleware(Middleware):
         result = await call_next(context)
         return result
 
+class RequestLoggingMiddleware(Middleware):
+    async def on_request(self, context: MiddlewareContext, call_next):
+        print("====== INCOMING REQUEST ======")
+        print("REQUEST METHOD:", context.message.method if hasattr(context.message, 'method') else 'Unknown')
+        print("REQUEST PARAMS:", context.message.params if hasattr(context.message, 'params') else 'Unknown')
+        print("FULL REQUEST:", context.message)
+        print("=============================")
+        result = await call_next(context)
+        return result
+
 
 # Helper Functions
 def get_message_json(tool_name, **kwargs):
@@ -183,6 +193,7 @@ mcp = FastMCP.from_fastapi(
 #mcp = FastMCP(name="Icron MCP Server", stateless_http=True, instructions="This is a simple MCP server that serves the Icron company.")
 
 mcp.add_middleware(LoggingMiddleware())
+mcp.add_middleware(RequestLoggingMiddleware())
 
 
 path = Path("./info.txt").resolve()
