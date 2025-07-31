@@ -5,6 +5,8 @@ from service_core.logger import get_logger
 from service_core.router import resolve
 from service_core.registry import get_handler
 from service_core.executor import execute
+import traceback
+import asyncio
 
 logger = get_logger(__name__)
 
@@ -12,16 +14,12 @@ def start_rpc_consumer(queue, host, port, username, password, virtual_host):
     def callback(ch, method, props, body):
         try:
             message = json.loads(body)
-            logger.info(f"[RPC] Received message: {message}")
+            logger.info(f"[RPC] Received message at {queue=}: {message} ")
 
-            message_code = message.get("message_code")
-            payload = message.get("payload")
-
-            if not message_code or not payload:
-                raise ValueError("Invalid message format. 'message_code' and 'payload' are required.")
-
-            handler = get_handler(message_code)
-            result = execute(handler, payload)
+            handler = get_handler(queue)
+            result, status_code = execute(handler, message)
+            
+            print(f"[RPC] Result: {status_code=} {result=}")
 
             if not isinstance(props.reply_to, str):
                 logger.error(f"[!] Invalid reply_to: {props.reply_to}")
@@ -30,19 +28,21 @@ def start_rpc_consumer(queue, host, port, username, password, virtual_host):
             ch.basic_publish(
                 exchange='',
                 routing_key=props.reply_to,
-                properties=pika.BasicProperties(correlation_id=props.correlation_id),
+                properties=pika.BasicProperties(correlation_id=props.correlation_id, headers={'StatusCode': str(status_code)}),
                 body=json.dumps(result)
             )
 
         except Exception as e:
-            logger.error(f"[RPC] Error processing message: {e}")
+            err_msg = traceback.format_exc()
+            logger.error(f"[RPC] Error processing message: {err_msg}")
 
     credentials = pika.PlainCredentials(username, password)
     parameters = pika.ConnectionParameters(
         host=host,
         port=port,
         virtual_host=virtual_host,
-        credentials=credentials
+        credentials=credentials,
+        heartbeat=90
     )
 
     connection = pika.BlockingConnection(parameters)
@@ -56,18 +56,12 @@ def start_rpc_consumer(queue, host, port, username, password, virtual_host):
 
 def start_rpc_consumer_mcp(queue, host, port, username, password, virtual_host, all_tools, all_resource_templates, mcp):
     def callback(ch, method, props, body):
-        import asyncio
+      
         try:
-            message = None
-            if isinstance(body, bytes):
-                body = body.decode('utf-8')
-
             message = json.loads(body)
-            
+
             logger.info(f"[RPC] Received message: {message}")
-
             
-
             incoming_message_type = str(props.type)
 
             if incoming_message_type == "query.tools":
@@ -85,7 +79,6 @@ def start_rpc_consumer_mcp(queue, host, port, username, password, virtual_host, 
                 try:
                     tool_object = asyncio.run(mcp.get_tool(tool_name))
                     response = asyncio.run(tool_object.run(arguments))
-                    
                     result = {"structuredContent" : response.structured_content}
                 except Exception as e:
                     logger.error(f"[RPC] Error calling tool: {e}")
@@ -111,16 +104,13 @@ def start_rpc_consumer_mcp(queue, host, port, username, password, virtual_host, 
             if not isinstance(props.reply_to, str):
                 logger.error(f"[!] Invalid reply_to: {props.reply_to}")
                 return
-
             
-                
             ch.basic_publish(
                 exchange='',
                 routing_key=props.reply_to,
                 properties=pika.BasicProperties(correlation_id=props.correlation_id,type=message_type,content_type="application/json", headers={"StatusCode" : 200}),
                 body=json.dumps(result)
             )
-            
 
         except Exception as e:
             logger.error(f"[RPC] Error processing message: {e}")

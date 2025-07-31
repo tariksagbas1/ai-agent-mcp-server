@@ -1,8 +1,12 @@
 import pika
-from service_core.credentials import DEFAULT_USERNAME, DEFAULT_PASSWORD
+import os
+from service_core.config import get_user_credentials
 
 def get_connection_parameters(metadata: dict) -> pika.ConnectionParameters:
-    credentials = pika.PlainCredentials(DEFAULT_USERNAME,DEFAULT_PASSWORD)
+
+    username, password = get_user_credentials()
+    credentials = pika.PlainCredentials(username, password)
+
     return pika.ConnectionParameters(
         host=metadata["host"],
         port=metadata["port"],

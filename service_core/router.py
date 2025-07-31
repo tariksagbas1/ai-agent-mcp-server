@@ -1,14 +1,15 @@
-from service_core.config import load_services
+from service_core.config import load_services, get_user_credentials
 from service_core.registry import get_handler
 from service_core.executor import execute
 from service_core.message_type import MessageType
-from service_core.credentials import DEFAULT_USERNAME, DEFAULT_PASSWORD
 
 def resolve(service_list, message_code, service_code, allow_only_sendable=False, prefer_server=False):
     """
     Public message_code (örneğin 'LLMChat') ver, tüm .idep taranır, hangi mesaj tipi olduğu bulunur
     ve exchange, routing_key, vhost, port gibi değerler çıkarılır.
     """
+
+    username, password = get_user_credentials()
     service = next((s for s in service_list if s["ServiceCode"] == service_code), None)
     if not service:
         raise ValueError(f"Service '{service_code}' not found.")
@@ -27,15 +28,21 @@ def resolve(service_list, message_code, service_code, allow_only_sendable=False,
             if entry.get(key_name) != message_code:
                 continue
 
+            #input_queues = entry.get("MBQueueName", [])
+            
+           # if not input_queues:
+              #  raise ValueError(f"No InputQueues found for message_code '{message_code}' in section '{section}'.")
+
+            #queue_info = input_queues[0]
+
             return {
                 "exchange": entry.get("MBExchangeName", ""),
                 "routing_key": next(iter(entry.get("RoutingKeyParameters", {}).values()), message_code),
                 "host": entry.get("MBHost", "localhost"),
-                #"host": "rabbitmq",
                 "vhost": entry.get("MBVirtualHostName"),
                 "port": entry.get("MBPort"),
-                "username": entry.get("MBUserName", DEFAULT_USERNAME),
-                "password": entry.get("MBPassword", DEFAULT_PASSWORD)
+                "username": entry.get("MBUserName", username),
+                "password": entry.get("MBPassword", password)
             }
 
     raise ValueError(f"Message code '{message_code}' not found in any supported sections.")
@@ -73,8 +80,8 @@ def resolve(service_list, message_code, service_code, allow_only_sendable=False,
                         "host": queue_info.get("MBHost", default_host),
                         "vhost": queue_info.get("MBVirtualHostName", default_vhost),
                         "port": queue_info.get("MBPort", default_port),
-                        "username": DEFAULT_USERNAME,
-                        "password": DEFAULT_PASSWORD
+                        "username": username,
+                        "password": password
                     }
                 else:
                     # Client için: queue yok ama host/vhost yukarıdan alınır
@@ -86,14 +93,14 @@ def resolve(service_list, message_code, service_code, allow_only_sendable=False,
                         "host": default_host,
                         "vhost": default_vhost,
                         "port": default_port,
-                        "username": DEFAULT_USERNAME,
-                        "password": DEFAULT_PASSWORD
+                        "username": username,
+                        "password": password
                     }
 
     raise ValueError(f"MessageCode '{message_code}' not found in service '{service_code}'")
 
-def route_and_execute(message, idep_dir):
-    services = load_services(message["service_filename"], idep_dir)
-    meta = resolve(services, message["message_code"], message["service_code"])
-    handler = get_handler(message["message_code"])
-    return execute(handler, message["payload"])
+# def route_and_execute(message, idep_dir):
+#     services = load_services(message["service_filename"], idep_dir)
+#     meta = resolve(services, message["message_code"], message["service_code"])
+#     handler = get_handler(message["message_code"])
+#     return execute(handler, message["payload"])

@@ -11,7 +11,31 @@ DEPLOYMENT_CODE = os.getenv("DEPLOYMENT_CODE")
 SERVICE_CODE    = os.getenv("SERVICE_CODE")      
 IDEP_DIR = os.path.join(PROJECT_DIR, "configs")
 
+
+def get_user_credentials():
+    service_code = os.getenv("SERVICE_CODE")
+    deployment_code = os.getenv("DEPLOYMENT_CODE")
+    
+    if not service_code or not deployment_code:
+        raise ValueError("SERVICE_CODE and DEPLOYMENT_CODE must be set in the environment variables.")
+    
+    username = f"{SERVICE_CODE}_0@{DEPLOYMENT_CODE}"
+    password = f"{SERVICE_CODE}_0@{DEPLOYMENT_CODE}"
+
+    return username, password
+
 def load_services():
+    idep_path = os.path.join(IDEP_DIR, f"{DEPLOYMENT_CODE}.idep")
+    if not os.path.exists(idep_path):
+        raise FileNotFoundError(f"Dosya bulunamadı: {idep_path}")
+    with open(idep_path, "r", encoding="utf-8") as f:
+        all_data = json.load(f)
+
+    services = all_data.get("Services", [])
+
+    return services
+
+def load_service_config():
     idep_path = os.path.join(IDEP_DIR, f"{DEPLOYMENT_CODE}.idep")
     if not os.path.exists(idep_path):
         raise FileNotFoundError(f"Dosya bulunamadı: {idep_path}")
@@ -25,12 +49,12 @@ def load_services():
     return active_service
 
 def load_section(section_name: str):
-    svc = load_services()
+    svc = load_service_config()
     if section_name not in svc:
         raise KeyError(f"Section '{section_name}' bulunamadı.")
     return svc[section_name]
 
-def load_subsection(section_name: str, subsection_name: str):
+def load_subsection(section_name: str, subsection_name: str) -> dict | list:
     section = load_section(section_name)
 
     if isinstance(section, dict):
