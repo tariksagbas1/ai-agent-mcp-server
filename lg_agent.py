@@ -250,7 +250,6 @@ async def get_all_tools(req : Request):
             "description" : tool.description,
             "inputSchema" : tool.inputSchema,
         })
-    print(transformed_tools[2])
     return {"response" : transformed_tools}
 
 @app.post("/call_tool")
@@ -271,6 +270,8 @@ async def call_tool_endpoint(req: Request):
 async def get_all_resource_templates(req : Request):
     async with Client(MCP_SERVER_URL) as client:
         resource_templates = await client.list_resource_templates()
+    
+    print(dir(resource_templates))
     print(resource_templates)
     
     return {"result": resource_templates}

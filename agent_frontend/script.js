@@ -14,6 +14,34 @@ function appendMessage(sender, text, isHtml = false) {
     chatWindow.scrollTop = chatWindow.scrollHeight;
 }
 
+async function test_mcp() {
+    const payload = {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "tools/call",
+        "params": {
+            "name": "get_date_time",
+            "arguments": {
+                "timezone": "Europe/Istanbul" // or any valid timezone
+            }
+        }
+    };
+    const res = await fetch("http://0.0.0.0:8080/all_resource_templates", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json, text/event-stream'
+        },
+        body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    console.log(data);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    test_mcp();
+});
+
 let allTools = [];
 
 async function loadToolsSidebar() {

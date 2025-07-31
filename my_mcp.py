@@ -1,4 +1,5 @@
 
+from fastapi import FastAPI
 from fastmcp import FastMCP
 from datetime import datetime
 from openai import OpenAI
@@ -162,8 +163,24 @@ def {table_name}({param_sig}):
         # Register the resource
         mcp.resource(resource_uri)(resource_func)
 
+app = FastAPI()
 
-mcp = FastMCP(name="Icron MCP Server", stateless_http=True, instructions="This is a simple MCP server that serves the Icron company.")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://127.0.0.1:5500"],            
+    allow_methods=["*"],          
+    allow_headers=["*"],
+    expose_headers=["Mcp-Session-Id"],
+)
+
+mcp = FastMCP.from_fastapi(
+    app,                    
+    stateless_http=True,
+    name="My MCP Server",
+    instructions="…"
+)
+
+#mcp = FastMCP(name="Icron MCP Server", stateless_http=True, instructions="This is a simple MCP server that serves the Icron company.")
 
 mcp.add_middleware(LoggingMiddleware())
 
@@ -425,8 +442,6 @@ def get_employees(full_name: str = "", department: str = "", gender: str = "", o
         traceback.print_exc()
         return {"result": json.dumps({"error": f"Error getting employees: {e}"})}
 
-#@mcp.tool
-def ask_programmer_agent(user_prompt: str) -> dict:
     """
     Use this tool if you are not able to satisfy the user's request. This tool will prompt the programmer agent to help you.
     """
@@ -449,6 +464,7 @@ if __name__ == "__main__":
     register_tools_from_idep(mcp, "config/test_config.idep")
     register_resources_from_idep(mcp, "config/test_config.idep")
     all_tools = asyncio.run(mcp.get_tools())
+    
     """
     for t in all_tools:
         print("*"*100)
@@ -457,6 +473,9 @@ if __name__ == "__main__":
         print(all_tools[t])
         print("*"*100)
     """
+
+
+    
     mcp.run(transport="http", port=8000, log_level="debug", host="0.0.0.0")
 
 
