@@ -54,6 +54,13 @@ body {
     z-index: 2;
     font-size: 1.13rem;
 }
+
+.right-sidebar {
+    left: auto;
+    right: 0;
+    border-right: none;
+    border-left: 1.5px solid #e5e7eb;
+}
 .sidebar-header {
     font-weight: bold;
     font-size: 1.25rem;
@@ -62,12 +69,12 @@ body {
     background: #e5e7eb;
     letter-spacing: 0.5px;
 }
-#tool-list {
+#tool-list, #resource-list {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-#tool-list li {
+#tool-list li, #resource-list li {
     padding: 18px 28px;
     cursor: pointer;
     border-bottom: 1px solid #e5e7eb;
@@ -75,7 +82,8 @@ body {
     font-size: 1.12rem;
     letter-spacing: 0.1px;
 }
-#tool-list li:hover, #tool-list li.active {
+#tool-list li:hover, #tool-list li.active,
+#resource-list li:hover, #resource-list li.active {
     background: #dde3f3;
 }
 .tool-details {
@@ -143,14 +151,20 @@ body {
     overflow-x: auto;
 }
 
-/* Adjust chat-container and chat-window for sidebar */
+/* Adjust chat-container and chat-window for both sidebars */
 .chat-container {
     position: relative;
+    margin-left: 340px;
+    margin-right: 340px;
+    width: calc(100% - 680px);
 }
 .chat-window {
-    margin-left: 340px;
     height: 450px;
-    width: 200px;
+    width: 100%;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .message {
@@ -177,11 +191,10 @@ body {
     background: #e5e7eb;
     color: #222;
     max-width: 300px;
-    margin-left: -320px;
+    margin-left: 20px;
     border-bottom-left-radius: 4px;
     padding-top: 0px;
     padding-bottom: 0;
-    
 }
 .message.agent p {
     margin-top: 12px;

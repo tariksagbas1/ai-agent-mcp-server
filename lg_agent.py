@@ -18,6 +18,7 @@ from langchain_core.messages import HumanMessage, AIMessage
 from fastmcp import Client
 from contextlib import asynccontextmanager
 from pydantic import create_model
+from fastapi import Response
 
 load_dotenv()
 
@@ -241,39 +242,22 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.post("/all_tools")
-async def get_all_tools(req : Request):
-    global all_tools
-    transformed_tools = []
-    for tool in all_tools:
-        transformed_tools.append({
-            "name" : tool.name,
-            "description" : tool.description,
-            "inputSchema" : tool.inputSchema,
-        })
-    return {"response" : transformed_tools}
-
-@app.post("/call_tool")
-async def call_tool_endpoint(req: Request):
-    data = await req.json()
-    tool_name = data.get("tool_name")
-    arguments = data.get("arguments", {})
-    if not tool_name:
-        return {"error": "tool_name is required"}
-    async with Client(MCP_SERVER_URL) as client:
-        try:
-            result = await client.call_tool(tool_name, arguments)
-            return {"result": result}
-        except Exception as e:
-            return {"error": str(e)}
-
-@app.post("/all_resource_templates")
-async def get_all_resource_templates(req : Request):
-    async with Client(MCP_SERVER_URL) as client:
-        resource_templates = await client.list_resource_templates()
-    print(resource_templates)
-    
-    return {"result": resource_templates}
+@app.post("/mcp_proxy")
+async def mcp_proxy(req : Request):
+    request_data = await req.json()
+    try:
+        response = requests.post(
+            MCP_SERVER_URL,
+            json=request_data,
+            headers={
+                "Content-Type": "application/json",
+                "Accept": "application/json, text/event-stream"
+            }
+        )
+        return Response(content=response.text, media_type="text/event-stream")
+    except Exception as e:
+        print(e)
+        return {"error": str(e)}
 
 
 

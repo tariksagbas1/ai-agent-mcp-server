@@ -41,6 +41,15 @@ class LoggingMiddleware(Middleware):
         result = await call_next(context)
         return result
 
+class RequestLoggingMiddleware(Middleware):
+    async def on_request(self, context: MiddlewareContext, call_next):
+        print("====== INCOMING REQUEST ======")
+        print("REQUEST METHOD:", context.message.method if hasattr(context.message, 'method') else 'Unknown')
+        print("REQUEST PARAMS:", context.message.params if hasattr(context.message, 'params') else 'Unknown')
+        print("FULL REQUEST:", context.message)
+        print("=============================")
+        result = await call_next(context)
+        return result
 
 # Helper Functions
 def external_function_call(tool_name, **kwargs):
@@ -213,6 +222,7 @@ def Extract_{table_name}(scenario_code: str, username: str):
 mcp = FastMCP(name="Icron MCP Server", instructions="This is a simple MCP server that serves the Icron company.", stateless_http=True)
 
 mcp.add_middleware(LoggingMiddleware())
+mcp.add_middleware(RequestLoggingMiddleware())
 
 service_code = get_service_code()
 deployment_code = get_deployment_code()

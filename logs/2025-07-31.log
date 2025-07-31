@@ -1,0 +1,29 @@
+[2025-07-31 07:03:39] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-31 07:03:39] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-31 07:03:39] [INFO] [RPC] Received message: {}
+[2025-07-31 07:03:39] [INFO] [RPC] Received message: {}
+[2025-07-31 07:03:39] [INFO] [RPC] Received message: {}
+[2025-07-31 07:04:01] [INFO] [RPC] Received message: {}
+[2025-07-31 07:04:01] [INFO] [RPC] Received message: {}
+[2025-07-31 07:08:35] [INFO] [RPC] Received message: {}
+[2025-07-31 07:08:35] [INFO] [RPC] Received message: {}
+[2025-07-31 07:13:09] [INFO] [RPC] Received message: {}
+[2025-07-31 07:13:09] [INFO] [RPC] Received message: {}
+[2025-07-31 07:17:43] [INFO] [RPC] Received message: {}
+[2025-07-31 07:17:43] [INFO] [RPC] Received message: {}
+[2025-07-31 07:22:17] [INFO] [RPC] Received message: {}
+[2025-07-31 07:22:17] [INFO] [RPC] Received message: {}
+[2025-07-31 07:26:51] [INFO] [RPC] Received message: {}
+[2025-07-31 07:26:51] [INFO] [RPC] Received message: {}
+[2025-07-31 07:31:25] [INFO] [RPC] Received message: {}
+[2025-07-31 07:31:25] [INFO] [RPC] Received message: {}
+[2025-07-31 08:04:14] [INFO] [RPC] Received message: {}
+[2025-07-31 08:08:56] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-31 08:08:56] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-31 08:08:56] [INFO] [RPC] Received message: {}
+[2025-07-31 08:08:56] [INFO] [RPC] Received message: {}
+[2025-07-31 08:16:33] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-31 08:16:33] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-31 08:20:53] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-31 08:20:53] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-31 08:21:23] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
