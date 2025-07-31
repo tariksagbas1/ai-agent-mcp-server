@@ -22,6 +22,7 @@ from service_core.rpc_client import rpc_call
 from context import *
 from service_core.config import load_services
 from fastmcp.client import Client
+import pytz
 
 import openai
 import pandas as pd
@@ -56,8 +57,7 @@ def external_function_call(tool_name, **kwargs):
         payload=kwargs,
         headers = headers
     )
-    if "IsFeasible" in response:
-        response["IsFeasible"] = response["IsFeasible"] == 1
+    
     
     print(f"[RPC] Tool Call Response : {response}")
 
@@ -79,7 +79,6 @@ def external_data_extract_call(table_name, **kwargs) -> pd.DataFrame:
         'api_type': 'restapi',
         'endpoint': '/icron_api/v1/extract',
         "query_parameters": f"?UserName={username}",
-        "FunctionName": "ExtractData"
     }  
 
     data = rpc_call("ExtractData", json_body, headers, 60)

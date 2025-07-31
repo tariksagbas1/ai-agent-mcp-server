@@ -3,6 +3,7 @@
     align-items: center;
     gap: 14px;
     padding: 18px 20px 12px 20px;
+    border-radius: 10px;
     background: #f6f8fa;
     border-bottom: 1.5px solid #e5e7eb;
     box-shadow: 0 2px 8px rgba(0,0,0,0.03);
@@ -148,7 +149,7 @@ body {
 }
 .chat-window {
     margin-left: 340px;
-    height: 700px;
+    height: 450px;
     width: 200px;
 }
 
@@ -193,6 +194,8 @@ body {
     background: #fff;
     border-top: 1px solid #e5e7eb;
     gap: 8px;
+    border-radius: 20px;
+    margin-bottom: 20px;
 }
 
 .chat-input {

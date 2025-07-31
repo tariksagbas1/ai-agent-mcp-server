@@ -1,0 +1,348 @@
+[2025-07-30 06:27:15] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 06:27:15] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 06:27:49] [INFO] [RPC] Received message: {'AuthorizationCodes': [{'AuthorizationCodeValue': 'sad', 'Description': 'asd'}]}
+[2025-07-30 06:30:24] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-30 06:30:24] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-30 06:31:52] [ERROR] [RPC] Error processing message: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+[2025-07-30 06:33:03] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-30 06:39:44] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-30 06:40:37] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 06:40:37] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 06:40:39] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-30 06:46:27] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-30 06:46:27] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-30 06:48:27] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-30 06:48:27] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-30 06:52:39] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 06:52:39] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 06:52:43] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-30 06:52:43] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-30 06:53:19] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-30 06:54:27] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 06:54:27] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 08:04:50] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 08:04:50] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 08:05:35] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 08:05:35] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 08:06:17] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 08:06:17] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 08:08:25] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 08:24:28] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 08:24:28] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 11:00:07] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 11:00:07] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 11:00:56] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 11:00:56] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 11:11:42] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 11:11:42] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 11:12:02] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-30 11:16:52] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 11:16:52] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 11:16:56] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-30 11:16:56] [ERROR] [RPC] Message returned - Reply queue may not exist: NO_ROUTE
+[2025-07-30 11:22:56] [ERROR] [RPC] Error processing message: Expecting value: line 1 column 1 (char 0)
+[2025-07-30 11:23:49] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 11:23:49] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 11:23:54] [ERROR] [RPC] Error processing message: Expecting value: line 1 column 1 (char 0)
+[2025-07-30 11:24:49] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 11:24:49] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 11:24:51] [ERROR] [RPC] Error processing message: Expecting value: line 1 column 1 (char 0)
+[2025-07-30 11:25:15] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 11:25:15] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 11:25:17] [ERROR] [RPC] Error processing message: Expecting value: line 1 column 1 (char 0)
+[2025-07-30 11:26:24] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 11:26:24] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 11:26:28] [ERROR] [RPC] Error processing message: Expecting value: line 1 column 1 (char 0)
+[2025-07-30 11:27:11] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 11:27:11] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 11:27:14] [ERROR] [RPC] Error processing message: cannot access local variable 'e' where it is not associated with a value
+[2025-07-30 11:27:33] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 11:27:33] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 11:27:35] [ERROR] [RPC] Error parsing message: Expecting value: line 1 column 1 (char 0)
+[2025-07-30 11:27:35] [ERROR] [RPC] Error processing message: cannot access local variable 'message' where it is not associated with a value
+[2025-07-30 11:28:28] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 11:28:28] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 11:28:29] [ERROR] [RPC] Error processing message: Expecting value: line 1 column 1 (char 0)
+[2025-07-30 11:29:10] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 11:29:10] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 11:29:12] [ERROR] [RPC] Error processing message: Expecting value: line 1 column 1 (char 0)
+[2025-07-30 11:29:45] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 11:29:45] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 11:29:54] [ERROR] [RPC] Error processing message: Expecting value: line 1 column 1 (char 0)
+[2025-07-30 11:30:39] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 11:30:39] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 11:30:40] [ERROR] [RPC] Error processing message: cannot access local variable 'message' where it is not associated with a value
+[2025-07-30 11:31:53] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 11:31:53] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 11:31:58] [ERROR] [RPC] Error processing message: cannot access local variable 'message' where it is not associated with a value
+[2025-07-30 11:32:16] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 11:32:16] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 11:32:18] [INFO] [RPC] Received message: None
+[2025-07-30 11:32:18] [INFO] [RPC] Received message: {'response': [{'name': 'OrderSimulation', 'description': "It simulates a customer order and determines whether the order can be satisfied. Date format: %Y-%m-%d %H:%M:%S. Default line status (or status): 'Confirmed'. Default priority is 1.", 'inputSchema': {'properties': {'CustomerName': {'title': 'Customername', 'type': 'string'}, 'ItemName': {'title': 'Itemname', 'type': 'string'}, 'Priority': {'title': 'Priority', 'type': 'integer'}, 'Quantity': {'title': 'Quantity', 'type': 'integer'}, 'Date': {'title': 'Date', 'type': 'string'}, 'LineStatus': {'title': 'Linestatus', 'type': 'string'}, 'ScenarioCode': {'title': 'Scenariocode', 'type': 'string'}, 'UserName': {'title': 'Username', 'type': 'string'}, 'InventoryCode': {'title': 'Inventorycode', 'type': 'string'}}, 'required': ['CustomerName', 'ItemName', 'Priority', 'Quantity', 'Date', 'LineStatus', 'ScenarioCode', 'UserName', 'InventoryCode'], 'type': 'object'}}]}
+[2025-07-30 11:32:18] [ERROR] [RPC] Invalid message type: response.query.tools
+[2025-07-30 11:34:14] [INFO] [RPC] Received message: None
+[2025-07-30 11:35:08] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-30 11:35:08] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-30 11:38:12] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-30 11:38:12] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-30 11:38:17] [INFO] [RPC] Received message: None
+[2025-07-30 11:38:49] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-30 11:38:49] [ERROR] [RPC] Message returned - Reply queue may not exist: NO_ROUTE
+[2025-07-30 11:42:10] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-30 11:42:10] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-30 11:46:04] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 11:46:04] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 11:46:22] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-30 11:48:46] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 11:48:46] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 11:49:02] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-30 11:49:02] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-30 11:49:30] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-30 11:50:31] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 11:50:31] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 11:50:40] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-30 12:04:32] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-30 12:04:59] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 12:04:59] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 12:04:59] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-30 12:04:59] [ERROR] [RPC] Message returned - Reply queue may not exist: NO_ROUTE
+[2025-07-30 12:05:06] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-30 12:05:06] [ERROR] [RPC] Message returned - Reply queue may not exist: NO_ROUTE
+[2025-07-30 12:06:11] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-30 12:06:11] [ERROR] [RPC] Message returned - Reply queue may not exist: NO_ROUTE
+[2025-07-30 12:07:38] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 12:07:38] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 12:07:52] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 12:07:52] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 12:08:14] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-30 12:08:14] [ERROR] [RPC] Message returned - Reply queue may not exist: NO_ROUTE
+[2025-07-30 12:10:01] [INFO] 📨 Sending RPC to → exchange=MCP_Exchange | routing_key=MCP
+[2025-07-30 12:10:01] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-30 12:22:46] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-30 12:22:46] [ERROR] [RPC] Message returned - Reply queue may not exist: NO_ROUTE
+[2025-07-30 12:28:00] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-30 12:28:00] [ERROR] [RPC] Message returned - Reply queue may not exist: NO_ROUTE
+[2025-07-30 12:31:22] [ERROR] [RPC] Error processing message: Expecting ',' delimiter: line 13 column 10 (char 366)
+[2025-07-30 12:32:08] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 121, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-30 12:32:08] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 12:32:09] [ERROR] [RPC] Message returned - Reply queue may not exist: NO_ROUTE
+[2025-07-30 12:32:48] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 121, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-30 12:32:48] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 12:32:48] [ERROR] [RPC] Message returned - Reply queue may not exist: NO_ROUTE
+[2025-07-30 12:33:36] [INFO] [RPC] Received message: {'name': 'Extract_Inventory', 'arguments': {'scenario_code': 'ODP', 'username': 'furkan.canturk'}}
+[2025-07-30 12:33:37] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='ExtractData'
+[2025-07-30 12:33:37] [ERROR] [RPC] Message returned - Reply queue may not exist: NO_ROUTE
+[2025-07-30 12:39:10] [ERROR] [RPC] Error processing message: Expecting value: line 1 column 1 (char 0)
+[2025-07-30 12:39:40] [INFO] [RPC] Received message: 
+[2025-07-30 12:39:40] [ERROR] [RPC] Message returned - Reply queue may not exist: NO_ROUTE
+[2025-07-30 12:52:28] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 12:52:28] [ERROR] [RPC] Message returned - Reply queue may not exist: NO_ROUTE
+[2025-07-30 12:53:36] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 12:53:36] [ERROR] [RPC] Message returned - Reply queue may not exist: NO_ROUTE
+[2025-07-30 12:54:32] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 12:54:32] [ERROR] [RPC] Message returned - Reply queue may not exist: NO_ROUTE
+[2025-07-30 12:54:56] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 12:54:56] [ERROR] [RPC] Message returned - Reply queue may not exist: NO_ROUTE
+[2025-07-30 12:55:11] [INFO] [RPC] Received message: {'tool_name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 123, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-30 12:55:11] [ERROR] [RPC] Error calling tool: Unknown tool: None
+[2025-07-30 12:56:17] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 12:56:17] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 12:56:17] [ERROR] [RPC] Message returned - Reply queue may not exist: NO_ROUTE
+[2025-07-30 12:56:17] [ERROR] [RPC] Message returned - Reply queue may not exist: NO_ROUTE
+[2025-07-30 12:56:28] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 12:56:28] [ERROR] [RPC] Message returned - Reply queue may not exist: NO_ROUTE
+[2025-07-30 12:56:39] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 123, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-30 12:56:39] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 12:56:39] [ERROR] [RPC] Message returned - Reply queue may not exist: NO_ROUTE
+[2025-07-30 12:58:38] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 12:58:38] [ERROR] [RPC] Message returned - Reply queue may not exist: NO_ROUTE
+[2025-07-30 12:58:38] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 12:58:38] [ERROR] [RPC] Message returned - Reply queue may not exist: NO_ROUTE
+[2025-07-30 13:00:41] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 13:00:41] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 13:00:41] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 13:00:41] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 13:00:41] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 13:00:41] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 13:00:41] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 13:00:41] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 13:00:41] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 13:00:41] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 13:00:41] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 13:00:41] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 13:00:41] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 13:01:59] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 13:01:59] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 13:01:59] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 13:01:59] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 13:01:59] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 13:01:59] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 13:02:03] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 13:02:42] [INFO] [RPC] Received message: {'foo': 'bar'}
+[2025-07-30 13:02:42] [ERROR] [RPC] Error processing message: Expecting value: line 1 column 1 (char 0)
+[2025-07-30 13:02:43] [ERROR] [RPC] Error processing message: Expecting value: line 1 column 1 (char 0)
+[2025-07-30 13:02:46] [INFO] [RPC] Received message: {}
+[2025-07-30 13:03:21] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 123, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-30 13:03:22] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 13:03:36] [INFO] [RPC] Received message: {}
+[2025-07-30 13:03:47] [INFO] [RPC] Received message: {}
+[2025-07-30 13:03:55] [INFO] [RPC] Received message: {}
+[2025-07-30 13:04:09] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 123, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-30 13:04:09] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 13:05:46] [INFO] [RPC] Received message: {}
+[2025-07-30 13:06:06] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 13:06:06] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 13:06:06] [INFO] [RPC] Received message: {}
+[2025-07-30 13:06:22] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 123, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-30 13:06:22] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 13:06:22] [ERROR] [RPC] Error processing message: Object of type ToolResult is not JSON serializable
+[2025-07-30 13:07:16] [INFO] [RPC] Received message: {}
+[2025-07-30 13:07:17] [INFO] [RPC] Received message: {}
+[2025-07-30 13:07:29] [INFO] [RPC] Received message: {}
+[2025-07-30 13:07:41] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 13:07:41] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 13:07:41] [INFO] [RPC] Received message: {}
+[2025-07-30 13:07:50] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 123, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-30 13:07:50] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 13:07:50] [ERROR] [RPC] Error processing message: Object of type TextContent is not JSON serializable
+[2025-07-30 13:08:19] [INFO] [RPC] Received message: {}
+[2025-07-30 13:08:32] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 13:08:32] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 13:08:32] [INFO] [RPC] Received message: {}
+[2025-07-30 13:08:41] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 123, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-30 13:08:41] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 13:09:30] [INFO] [RPC] Received message: {}
+[2025-07-30 13:10:41] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 123, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-30 13:10:41] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 13:11:50] [INFO] [RPC] Received message: {}
+[2025-07-30 13:11:51] [INFO] [RPC] Received message: {}
+[2025-07-30 13:12:34] [INFO] [RPC] Received message: {}
+[2025-07-30 13:12:39] [INFO] [RPC] Received message: {}
+[2025-07-30 13:12:48] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 123, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-30 13:12:48] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 13:14:11] [INFO] [RPC] Received message: {}
+[2025-07-30 13:14:19] [INFO] [RPC] Received message: {}
+[2025-07-30 13:14:32] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 13:14:32] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 13:14:32] [INFO] [RPC] Received message: {}
+[2025-07-30 13:14:32] [INFO] [RPC] Received message: {}
+[2025-07-30 13:14:32] [INFO] [RPC] Received message: {}
+[2025-07-30 13:14:40] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 1, 'Quantity': 1, 'Date': '1', 'LineStatus': '1', 'ScenarioCode': '1', 'UserName': '1', 'InventoryCode': '1'}}
+[2025-07-30 13:14:40] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 13:15:58] [INFO] [RPC] Received message: {}
+[2025-07-30 13:16:11] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 13:16:11] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 13:16:11] [INFO] [RPC] Received message: {}
+[2025-07-30 13:16:13] [INFO] [RPC] Received message: {}
+[2025-07-30 13:16:22] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 123123, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-30 13:16:22] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 13:16:24] [INFO] [RPC] Received message: {}
+[2025-07-30 13:16:25] [INFO] [RPC] Received message: {}
+[2025-07-30 13:16:35] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '1', 'ItemName': '1', 'Priority': 1, 'Quantity': 1, 'Date': '1', 'LineStatus': '1', 'ScenarioCode': '1', 'UserName': '1', 'InventoryCode': '1'}}
+[2025-07-30 13:16:35] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 13:17:02] [INFO] [RPC] Received message: {}
+[2025-07-30 13:20:58] [INFO] [RPC] Received message: {}
+[2025-07-30 13:25:32] [INFO] [RPC] Received message: {}
+[2025-07-30 13:25:33] [INFO] [RPC] Received message: {}
+[2025-07-30 13:25:34] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 13:30:06] [INFO] [RPC] Received message: {}
+[2025-07-30 13:30:07] [INFO] [RPC] Received message: {}
+[2025-07-30 13:30:10] [INFO] [RPC] Received message: {}
+[2025-07-30 13:30:23] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 13:30:23] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 13:30:23] [INFO] [RPC] Received message: {}
+[2025-07-30 13:31:16] [INFO] [RPC] Received message: {}
+[2025-07-30 13:32:14] [INFO] [RPC] Received message: {}
+[2025-07-30 13:32:29] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 13:32:29] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 13:32:29] [INFO] [RPC] Received message: {}
+[2025-07-30 13:32:29] [INFO] [RPC] Received message: {}
+[2025-07-30 13:32:29] [INFO] [RPC] Received message: {}
+[2025-07-30 13:32:29] [INFO] [RPC] Received message: {}
+[2025-07-30 13:32:29] [INFO] [RPC] Received message: {}
+[2025-07-30 13:32:29] [INFO] [RPC] Received message: {}
+[2025-07-30 13:34:40] [INFO] [RPC] Received message: {}
+[2025-07-30 13:34:41] [INFO] [RPC] Received message: {}
+[2025-07-30 13:34:51] [INFO] [RPC] Received message: {}
+[2025-07-30 13:34:59] [INFO] [RPC] Received message: {}
+[2025-07-30 13:35:00] [INFO] [RPC] Received message: {}
+[2025-07-30 13:35:25] [INFO] [RPC] Received message: {}
+[2025-07-30 13:36:33] [INFO] [RPC] Received message: {}
+[2025-07-30 13:38:15] [INFO] [RPC] Received message: {}
+[2025-07-30 13:38:35] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 13:38:35] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 13:38:35] [INFO] [RPC] Received message: {}
+[2025-07-30 13:38:35] [INFO] [RPC] Received message: {}
+[2025-07-30 13:38:49] [INFO] [RPC] Received message: {}
+[2025-07-30 13:39:14] [INFO] [RPC] Received message: {}
+[2025-07-30 13:39:15] [INFO] [RPC] Received message: {}
+[2025-07-30 13:41:45] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 123, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-30 13:41:45] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 13:42:58] [INFO] [RPC] Received message: {}
+[2025-07-30 13:43:13] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 13:43:13] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 13:43:13] [INFO] [RPC] Received message: {}
+[2025-07-30 13:43:15] [INFO] [RPC] Received message: {}
+[2025-07-30 13:43:23] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 123, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-30 13:43:23] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 13:43:48] [INFO] [RPC] Received message: {}
+[2025-07-30 13:43:49] [INFO] [RPC] Received message: {}
+[2025-07-30 13:44:33] [INFO] [RPC] Received message: {}
+[2025-07-30 13:44:46] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 13:44:46] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 13:44:46] [INFO] [RPC] Received message: {}
+[2025-07-30 13:44:49] [INFO] [RPC] Received message: {}
+[2025-07-30 13:45:00] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 123, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-30 13:45:00] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 13:45:00] [ERROR] [RPC] Error calling tool: Object of type TextContent is not JSON serializable
+[2025-07-30 13:45:29] [INFO] [RPC] Received message: {}
+[2025-07-30 13:45:42] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 13:45:42] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 13:45:42] [INFO] [RPC] Received message: {}
+[2025-07-30 13:45:51] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 123, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-30 13:45:51] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 13:45:51] [ERROR] [RPC] Error processing message: Object of type TextContent is not JSON serializable
+[2025-07-30 13:46:18] [INFO] [RPC] Received message: {}
+[2025-07-30 13:46:32] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 13:46:32] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 13:46:32] [INFO] [RPC] Received message: {}
+[2025-07-30 13:46:32] [ERROR] [RPC] Error processing message: slice(0, 1, None)
+[2025-07-30 13:46:35] [INFO] [RPC] Received message: {}
+[2025-07-30 13:46:35] [ERROR] [RPC] Error processing message: slice(0, 1, None)
+[2025-07-30 13:46:45] [INFO] [RPC] Received message: {}
+[2025-07-30 13:46:45] [ERROR] [RPC] Error processing message: slice(0, 1, None)
+[2025-07-30 13:51:24] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 13:51:24] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 13:51:24] [INFO] [RPC] Received message: {}
+[2025-07-30 13:51:24] [INFO] [RPC] Received message: {}
+[2025-07-30 13:51:24] [INFO] [RPC] Received message: {}
+[2025-07-30 13:51:29] [INFO] [RPC] Received message: {}
+[2025-07-30 13:51:36] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 123, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-30 13:51:37] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 13:52:58] [INFO] [RPC] Received message: {}
+[2025-07-30 13:53:08] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 123, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-30 13:53:08] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 13:53:25] [INFO] [RPC] Received message: {}
+[2025-07-30 13:53:34] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 123, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-30 13:53:34] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 13:54:05] [INFO] [RPC] Received message: {}
+[2025-07-30 13:54:15] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 123, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-30 13:54:16] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 13:55:27] [INFO] [RPC] Received message: {}
+[2025-07-30 13:55:32] [INFO] [RPC] Received message: {}
+[2025-07-30 13:55:41] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '12', 'Priority': 123, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-30 13:55:41] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 13:56:07] [INFO] [RPC] Received message: {}
+[2025-07-30 13:56:09] [INFO] [RPC] Received message: {}
+[2025-07-30 13:56:17] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 123, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-30 13:56:17] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 13:57:18] [INFO] [RPC] Received message: {}
+[2025-07-30 13:57:40] [INFO] [RPC] Listening on RPC queue 'RemoveLLMAgent'...
+[2025-07-30 13:57:40] [INFO] [RPC] Listening on RPC queue 'MCP'...
+[2025-07-30 13:57:40] [INFO] [RPC] Received message: {}
+[2025-07-30 13:57:46] [INFO] [RPC] Received message: {}
+[2025-07-30 13:57:59] [INFO] [RPC] Received message: {'name': 'OrderSimulation', 'arguments': {'CustomerName': '123', 'ItemName': '123', 'Priority': 123, 'Quantity': 123, 'Date': '123', 'LineStatus': '123', 'ScenarioCode': '123', 'UserName': '123', 'InventoryCode': '123'}}
+[2025-07-30 13:57:59] [INFO] 📨 Sending RPC to → exchange='Exc' | routing_key='OrderSimulation'
+[2025-07-30 13:58:39] [INFO] [RPC] Received message: {}
+[2025-07-30 14:00:50] [INFO] [RPC] Received message: {}
+[2025-07-30 14:35:40] [INFO] [RPC] Received message: {}

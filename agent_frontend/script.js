@@ -17,13 +17,19 @@ function appendMessage(sender, text, isHtml = false) {
 let allTools = [];
 
 async function loadToolsSidebar() {
-    const res = await fetch('http://0.0.0.0:8080/all_tools', {
+    const res = await fetch('http://localhost:5000/api/v1/queue/call-rpc?messageCode=MCP', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({})
+        headers: { 
+            'Accept': 'application/json',
+            'Cache-Control': 'no-cache',
+            'Connection': 'keep-alive',
+            'Content-Type': 'application/json',
+            'Message-Type': 'query.tools'
+        },
+        body: "{}"
     });
     const data = await res.json();
-    allTools = data.response || [];
+    allTools = data.tools || [];
     const toolList = document.getElementById('tool-list');
     toolList.innerHTML = '';
     allTools.forEach((tool, idx) => {
@@ -88,29 +94,26 @@ function showToolDetails(idx) {
         toolResultDiv.textContent = '...'; // loading indicator
         try {
             const payload = {
-                tool_name: tool.name,
+                name: tool.name,
                 arguments: args
             };
-            const res = await fetch('http://0.0.0.0:8080/call_tool', {
+            const res = await fetch('http://localhost:5000/api/v1/queue/call-rpc?messageCode=MCP', {
                 method: 'POST',
-                headers: {
+                headers: { 
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Cache-Control': 'no-cache',
+                    'Connection': 'keep-alive',
+                    'Content-Type': 'application/json',
+                    'Message-Type': 'command.call_tool'
                 },
                 body: JSON.stringify(payload)
             });
             const data = await res.json();
             // Show both content and structured_content if present
             let html = '';
-            if (data.result) {
-                if (data.result.content) {
-                    html += `<div style="margin-bottom:12px;"><strong>Content:</strong><br><pre style='white-space:pre-wrap;'>${typeof data.result.content === 'string' ? data.result.content : JSON.stringify(data.result.content, null, 2)}</pre></div>`;
-                }
-                if (data.result.structured_content) {
-                    html += `<div><strong>Structured Content:</strong><br><pre style='white-space:pre-wrap;'>${typeof data.result.structured_content === 'string' ? data.result.structured_content : JSON.stringify(data.result.structured_content, null, 2)}</pre></div>`;
-                }
-                if (!data.result.content && !data.result.structured_content) {
-                    html = `<pre style='white-space:pre-wrap;'>${typeof data.result === 'string' ? data.result : JSON.stringify(data.result, null, 2)}</pre>`;
+            if (data) {
+                if (data.structuredContent) {
+                    html += `<div><strong>Structured Content:</strong><br><pre style='white-space:pre-wrap;'>${JSON.stringify(data.structuredContent, null, 2)}</pre></div>`;
                 }
                 toolResultDiv.innerHTML = html;
             } else if (data.error) {
@@ -137,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
         userInput.value = '';
         appendMessage('agent', '...'); // loading indicator
         try {
-            const res = await fetch('http://0.0.0.0:8080/agent', {
+            const res = await fetch('http://127.0.0.1:8080/agent', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
@@ -146,7 +149,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
             });
             const data = await res.json();
-            console.log("DATA IS :", data);
             // Remove the loading indicator
             const loading = chatWindow.querySelector('.message.agent:last-child');
             if (loading && loading.textContent === '...') loading.remove();

@@ -58,16 +58,21 @@ def start_rpc_consumer_mcp(queue, host, port, username, password, virtual_host, 
     def callback(ch, method, props, body):
         import asyncio
         try:
-            message = json.loads(body)
+            message = None
+            if isinstance(body, bytes):
+                body = body.decode('utf-8')
 
+            message = json.loads(body)
+            
             logger.info(f"[RPC] Received message: {message}")
+
             
 
             incoming_message_type = str(props.type)
 
             if incoming_message_type == "query.tools":
                 message_type = "response.query.tools"
-                result = {"response" : all_tools}
+                result = {"tools" : all_tools}
 
             elif incoming_message_type == "query.resource_templates":
                 message_type = "response.query.resource_templates"
@@ -80,7 +85,8 @@ def start_rpc_consumer_mcp(queue, host, port, username, password, virtual_host, 
                 try:
                     tool_object = asyncio.run(mcp.get_tool(tool_name))
                     response = asyncio.run(tool_object.run(arguments))
-                    result = {"response" : response.structured_content}
+                    
+                    result = {"structuredContent" : response.structured_content}
                 except Exception as e:
                     logger.error(f"[RPC] Error calling tool: {e}")
                     return
@@ -106,12 +112,15 @@ def start_rpc_consumer_mcp(queue, host, port, username, password, virtual_host, 
                 logger.error(f"[!] Invalid reply_to: {props.reply_to}")
                 return
 
+            
+                
             ch.basic_publish(
                 exchange='',
                 routing_key=props.reply_to,
-                properties=pika.BasicProperties(correlation_id=props.correlation_id,type=message_type,content_type="application/json"),
+                properties=pika.BasicProperties(correlation_id=props.correlation_id,type=message_type,content_type="application/json", headers={"StatusCode" : 200}),
                 body=json.dumps(result)
             )
+            
 
         except Exception as e:
             logger.error(f"[RPC] Error processing message: {e}")

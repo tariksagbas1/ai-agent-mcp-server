@@ -552,7 +552,7 @@
                 "LineStatus": "string"
               },
               "returns": {
-                "IsFeasible": "boolean"
+                "IsFeasible": "integer"
               }
             }
           },

@@ -81,7 +81,7 @@ def rpc_call_mcp (message_code: str, payload: dict, headers:dict, message_type :
     connection = pika.BlockingConnection(get_connection_parameters(metadata))
     channel = connection.channel()
 
-    result = channel.queue_declare(queue='testreplyqueue', exclusive=True)
+    result = channel.queue_declare(queue='', exclusive=True)
     callback_queue = result.method.queue
     correlation_id = str(uuid.uuid4())
 
