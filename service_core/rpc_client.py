@@ -4,24 +4,21 @@ import json
 import uuid
 import pika
 from dotenv import load_dotenv
-from service_core.config import load_services
+from service_core.config import load_services, load_service_config
 from service_core.router import resolve
 from service_core.rabbitmq_utils import get_connection_parameters
 from service_core.logger import get_logger
+from typing import Any
 
 logger = get_logger(__name__)
 load_dotenv()
 
-SERVICE_CODE = os.getenv("SERVICE_CODE")          
-DEPLOYMENT_CODE = os.getenv("DEPLOYMENT_CODE")   
-
-def rpc_call(message_code: str, payload: dict, headers:dict, timeout=5):
+def rpc_call(message_code: str, payload: dict, headers:dict, service_code:str, timeout=5) -> dict[str, Any]:
     
-    service = load_services()
+    service = load_service_config()
     
-    metadata = resolve([service], message_code, SERVICE_CODE, prefer_server=False)
+    metadata = resolve([service], message_code, os.getenv("SERVICE_CODE"), prefer_server=False)
     
-
     connection = pika.BlockingConnection(get_connection_parameters(metadata))
     channel = connection.channel()
 
@@ -37,11 +34,6 @@ def rpc_call(message_code: str, payload: dict, headers:dict, timeout=5):
             ch.stop_consuming()
 
     channel.basic_consume(queue=callback_queue, on_message_callback=on_response, auto_ack=True)
-
-    message = {
-        "message_code": message_code,
-        "payload": payload,
-    }
 
     exchange = metadata["exchange"] or ""
     routing_key = metadata["routing_key"]
@@ -62,26 +54,17 @@ def rpc_call(message_code: str, payload: dict, headers:dict, timeout=5):
     channel.start_consuming()
     connection.close()
 
-    return response.get("body")
+    return response.get("body", "No response received.")
 
-def rpc_call_mcp (message_code: str, payload: dict, headers:dict, message_type : str ,timeout=20):
+def rpc_call_mcp(message_code: str, payload: dict, headers:dict, message_type : str ,timeout=20):
     
-    #service = load_services()
-    
-    metadata = {
-        "exchange": "MCP_Exchange",
-        "routing_key": "MCP",
-        "host": "localhost",
-        "vhost" : "tarik.sagbas",
-        "port" : 5672,
-        "username" : "platform",
-        "password" : "platform"
-    }
-
+    service = load_service_config()
+    metadata = resolve([service], message_code, os.getenv("SERVICE_CODE"), prefer_server=False)
+  
     connection = pika.BlockingConnection(get_connection_parameters(metadata))
     channel = connection.channel()
 
-    result = channel.queue_declare(queue='', exclusive=True)
+    result = channel.queue_declare(queue='testreplyqueue', exclusive=True)
     callback_queue = result.method.queue
     correlation_id = str(uuid.uuid4())
 
@@ -95,16 +78,11 @@ def rpc_call_mcp (message_code: str, payload: dict, headers:dict, message_type :
 
     channel.basic_consume(queue=callback_queue, on_message_callback=on_response, auto_ack=True)
 
-    message = {
-        "message_code": "MCP",
-        "payload": payload,
-    }
-
     logger.info(f"📨 Sending RPC to → exchange={metadata.get('exchange')} | routing_key={metadata.get('routing_key')}")
 
     channel.basic_publish(
-        exchange=metadata.get("exchange"),
-        routing_key=metadata.get("routing_key"),
+        exchange=metadata.get("exchange"), # type: ignore
+        routing_key=metadata.get("routing_key"), # type: ignore
         properties=pika.BasicProperties(
             reply_to=callback_queue,
             correlation_id=correlation_id,
