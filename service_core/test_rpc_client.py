@@ -1,6 +1,5 @@
 import os
 from dotenv import load_dotenv
-from service_core.send_message import send_message
 from service_core.rpc_client import rpc_call_mcp
 
 # Ortam değişkenlerini yükle
