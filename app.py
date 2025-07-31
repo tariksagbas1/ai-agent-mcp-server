@@ -19,17 +19,13 @@ from fastmcp.resources import FileResource
 from pathlib import Path
 from utils import *
 from service_core.rpc_client import rpc_call
-from context import *
-from service_core.config import load_services
+#from context import *
+from service_core.config import load_services, load_service_config, get_user_credentials
 from fastmcp.client import Client
-import pytz
 
 import openai
 import pandas as pd
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-
-
-
 
 class LoggingMiddleware(Middleware):
     async def on_call_tool(self, context: MiddlewareContext, call_next):
@@ -41,11 +37,9 @@ class LoggingMiddleware(Middleware):
         result = await call_next(context)
         return result
 
-
 # Helper Functions
 def external_function_call(tool_name, **kwargs):
-
-    
+ 
     headers = {
         'FunctionName': tool_name
     } 
@@ -55,19 +49,19 @@ def external_function_call(tool_name, **kwargs):
     response = rpc_call(
         message_code=message_code,
         payload=kwargs,
-        headers = headers
+        headers = headers,
+        service_code=""
     )
-    
-    
+
     print(f"[RPC] Tool Call Response : {response}")
 
     return response
 
-def external_data_extract_call(table_name, **kwargs) -> pd.DataFrame:
+def external_data_extract_call(table_name, **kwargs) -> str:
     """
     Extracts data behind the system where users interact with it and ask some questions. It returns a pandas DataFrame.
     """
-    
+    username, password = get_user_credentials()
     json_body = {
         "ScenarioCode": kwargs["scenario_code"],
         "ParentClassName": "ICLSystemServer",
@@ -81,24 +75,24 @@ def external_data_extract_call(table_name, **kwargs) -> pd.DataFrame:
         "query_parameters": f"?UserName={username}",
     }  
 
-    data = rpc_call("ExtractData", json_body, headers, 60)
+    response = rpc_call("ExtractData", json_body, headers, service_code="", 60)
+    
+    check_error_msg = response.get("Error")
+    if check_error_msg:
+        return check_error_msg
 
-    if (data.get("Error")):
-        return data
+    df = pd.DataFrame(response.get('Objects'))
+    #rename_columns(df)
+    for col in df.columns:
+        if 'date' in col.lower() or 'time' in col.lower():
+            try:
+                df[col] = pd.to_datetime(df[col])
+            except:
+                pass
+    
+    table_json = df.to_json(orient="records", force_ascii=False)
 
-    if (data):
-        df = pd.DataFrame(data.get('Objects'))
-        #rename_columns(df)
-        for col in df.columns:
-            if 'date' in col.lower() or 'time' in col.lower():
-                try:
-                    df[col] = pd.to_datetime(df[col])
-                except:
-                    pass
-        
-        print(df.to_json(orient="records", force_ascii=False))
-
-        return df.to_json(orient="records", force_ascii=False)
+    return table_json
 
 def param_to_python_type(param_type: str) -> str:
     if param_type == "string" or param_type == "text":
@@ -116,7 +110,7 @@ def param_to_python_type(param_type: str) -> str:
     else:
         return param_type
 
-def register_tools_from_idep(mcp: FastMCP, function_schemas: str):
+def register_tools_from_idep(mcp: FastMCP, function_schemas: dict):
     """
     Registers the tools from the IDEP file.
     """
@@ -172,7 +166,7 @@ def {tool_name}({param_sig}):
         # Register the tool
         mcp.tool(tool_func, output_schema=output_schema)
 
-def register_resources_from_idep(mcp: FastMCP, db_schemas: str):
+def register_resources_from_idep(mcp: FastMCP, db_schemas: dict):
     """
     Registers the resources from the IDEP file.
     """
@@ -209,48 +203,46 @@ def Extract_{table_name}(scenario_code: str, username: str):
         mcp.resource(resource_uri)(resource_func)
 
 
+def main():
 
-mcp = FastMCP(name="Icron MCP Server", instructions="This is a simple MCP server that serves the Icron company.", stateless_http=True)
+    mcp = FastMCP(name="Icron MCP Server", instructions="This is a simple MCP server that serves the Icron company.", stateless_http=True)
 
-mcp.add_middleware(LoggingMiddleware())
+    mcp.add_middleware(LoggingMiddleware())
 
-service_code = get_service_code()
-deployment_code = get_deployment_code()
+    # service_code = get_service_code()
+    # deployment_code = get_deployment_code()
+    # username, password = get_user_credentials()
+    # set_rabbitmq_credentials(username, password)
+    mcp_service = load_service_config()
 
-username = f"{service_code}_0@{deployment_code}"
-password = f"{service_code}_0@{deployment_code}"
+    tools = mcp_service.get('LLMServiceOptions').get('LLMTools', None)
 
-set_rabbitmq_credentials(username, password)
-mcp_service = load_services()
-tools = mcp_service.get('LLMServiceOptions').get('LLMTools', None)
+    if not tools:
+        raise ValueError("No tools found")
 
-if not tools:
-    raise ValueError("No tools found")
+    register_tools_from_idep(mcp, tools['Functions'])
+    register_resources_from_idep(mcp, tools['DBSchemas'])
 
-register_tools_from_idep(mcp, tools['Functions'])
-register_resources_from_idep(mcp, tools['DBSchemas'])
+    all_tools = asyncio.run(mcp.get_tools())
+    all_resource_templates = asyncio.run(mcp.get_resource_templates())
 
-
-all_tools = asyncio.run(mcp.get_tools())
-all_resource_templates = asyncio.run(mcp.get_resource_templates())
-
-transformed_resource_templates = []
-for resource_template in list(all_resource_templates.values()):
-    transformed_resource_templates.append({
-        "name" : resource_template.name,
-        "description" : resource_template.description,
-        "inputSchema" : resource_template.parameters,
-    })
+    transformed_resource_templates = []
+    for resource_template in list(all_resource_templates.values()):
+        transformed_resource_templates.append({
+            "name" : resource_template.name,
+            "description" : resource_template.description,
+            "inputSchema" : resource_template.parameters,
+        })
 
 
-transformed_tools = []
-for tool in list(all_tools.values()):
-    transformed_tools.append({
-        "name" : tool.name,
-        "description" : tool.description,
-        "inputSchema" : tool.parameters,
-    })
-    
-    
+    transformed_tools = []
+    for tool in list(all_tools.values()):
+        transformed_tools.append({
+            "name" : tool.name,
+            "description" : tool.description,
+            "inputSchema" : tool.parameters,
+        })
+        
+    return mcp, all_tools, all_resource_templates 
 
 
