@@ -1,6 +1,7 @@
 import os
-from dotenv import load_dotenv
 from service_core.rpc_client import rpc_call_mcp
+from dotenv import load_dotenv
+
 
 # Ortam değişkenlerini yükle
 load_dotenv()

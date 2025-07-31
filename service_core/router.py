@@ -10,6 +10,7 @@ def resolve(service_list, message_code, service_code, allow_only_sendable=False,
     """
 
     username, password = get_user_credentials()
+    
     service = next((s for s in service_list if s["ServiceCode"] == service_code), None)
     if not service:
         raise ValueError(f"Service '{service_code}' not found.")

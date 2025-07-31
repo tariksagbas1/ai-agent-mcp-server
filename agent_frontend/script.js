@@ -32,11 +32,6 @@ async function loadToolsSidebar() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
     });
-    
-    // Handle SSE response
-    console.log("RES IS :", res);
-    console.log("Content-Type:", res.headers.get('content-type'));
-    
     if (res.headers.get('content-type')?.includes('text/event-stream')) {
         const text = await res.text();
         const lines = text.trim().split('\n');
@@ -79,24 +74,25 @@ async function loadResourcesSidebar() {
     });
     
     // Handle SSE response
-    console.log("RESOURCE RES IS :", res);
-    console.log("Resource Content-Type:", res.headers.get('content-type'));
+    //console.log("RESOURCE RES IS :", res);
+    //console.log("Resource Content-Type:", res.headers.get('content-type'));
     
     if (res.headers.get('content-type')?.includes('text/event-stream')) {
         const text = await res.text();
+        console.log("TEXT IS :", text);
         const lines = text.trim().split('\n');
         for (const line of lines) {
             if (line.startsWith('data: ')) { // Remove "data: " prefix
                 const jsonData = line.substring(6);
                 const data = JSON.parse(jsonData);
-                allResources = data.result?.resources || [];
+                allResources = data.result?.resourceTemplates || [];
                 break;
             }
         }
     } else {
         // Handle regular JSON response
         const data = await res.json();
-        allResources = data.result || [];
+        allResources = data.result?.resourceTemplates || [];
     }
     const resourceList = document.getElementById('resource-list');
     resourceList.innerHTML = '';
@@ -220,24 +216,18 @@ function showResourceDetails(idx) {
     let html = `<div><strong>${resource.name}</strong></div>`;
     html += `<div style="margin-bottom:8px;">${resource.description.replace(/\n/g, '<br>')}</div>`;
     html += `<form id="resource-param-form">`;
-    const props = resource.inputSchema?.properties || {};
-    for (const [key, val] of Object.entries(props)) {
-        html += `<label for="param-${key}">${val.title || key}${resource.inputSchema.required?.includes(key) ? ' *' : ''}</label>`;
-        if (val.type === 'string') {
-            html += `<input type="text" id="param-${key}" name="${key}" value="${val.default || ''}" />`;
-        } else if (val.type === 'integer' || val.type === 'number') {
-            html += `<input type="number" id="param-${key}" name="${key}" value="${val.default || ''}" />`;
-        } else if (val.type === 'boolean') {
-            html += `<select id="param-${key}" name="${key}">
-                        <option value="true">True</option>
-                        <option value="false">False</option>
-                     </select>`;
-        } else if (val.type === 'array') {
-            html += `<input type="text" id="param-${key}" name="${key}" placeholder="Comma-separated values" />`;
-        } else {
-            html += `<input type="text" id="param-${key}" name="${key}" value="${val.default || ''}" />`;
-        }
-    }
+    
+    // Extract variables from uriTemplate
+    const uriTemplate = resource.uriTemplate || '';
+    const variableMatches = uriTemplate.match(/\{([^}]+)\}/g) || [];
+    const variables = variableMatches.map(match => match.slice(1, -1)); // Remove curly braces
+    
+    // Create input fields for each variable found in the uriTemplate
+    variables.forEach(variable => {
+        html += `<label for="param-${variable}">${variable.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())} *</label>`;
+        html += `<input type="text" id="param-${variable}" name="${variable}" placeholder="Enter ${variable.replace(/_/g, ' ')}" required />`;
+    });
+    
     html += `<button type="submit" style="margin-top:10px;">Read Resource</button>`;
     html += `</form>`;
     details.innerHTML = html;
@@ -249,28 +239,26 @@ function showResourceDetails(idx) {
         const formData = new FormData(form);
         let args = {};
         for (const [key, val] of formData.entries()) {
-            const type = props[key]?.type;
-            if (type === 'integer' || type === 'number') {
-                args[key] = val === '' ? null : Number(val);
-            } else if (type === 'boolean') {
-                args[key] = val === 'true';
-            } else if (type === 'array') {
-                args[key] = val.split(',').map(v => v.trim()).filter(v => v.length > 0);
-            } else {
-                args[key] = val;
-            }
+            args[key] = val;
         }
+        
         // Show result in sidebar, not chat
         const resourceResultDiv = document.getElementById('resource-result');
         resourceResultDiv.textContent = '...'; // loading indicator
         try {
+            // Construct the full resource URI by replacing variables in the template
+            let fullUri = resource.uriTemplate;
+            variables.forEach(variable => {
+                const value = args[variable] || '';
+                fullUri = fullUri.replace(`{${variable}}`, value);
+            });
+            
             const payload = {
                 "jsonrpc": "2.0",
                 "id": 1,
                 "method": "resources/read",
                 "params": {
-                    "uri": resource.name,
-                    "arguments": args
+                    "uri": fullUri
                 }
             };
             const res = await fetch('http://localhost:8080/mcp_proxy', {
@@ -337,7 +325,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
             });
             const data = await res.json();
-            console.log("DATA IS :", data);
             // Remove the loading indicator
             const loading = chatWindow.querySelector('.message.agent:last-child');
             if (loading && loading.textContent === '...') loading.remove();

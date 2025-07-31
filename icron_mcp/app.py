@@ -17,7 +17,7 @@ from fastmcp.tools.tool import Tool
 from datetime import datetime
 from fastmcp.resources import FileResource
 from pathlib import Path
-from utils import *
+from icron_mcp.utils import *
 from service_core.rpc_client import rpc_call
 #from context import *
 from service_core.config import load_services, load_service_config, get_user_credentials
@@ -40,9 +40,15 @@ class LoggingMiddleware(Middleware):
 class RequestLoggingMiddleware(Middleware):
     async def on_request(self, context: MiddlewareContext, call_next):
         print("====== INCOMING REQUEST ======")
-        print("REQUEST METHOD:", context.message.method if hasattr(context.message, 'method') else 'Unknown')
-        print("REQUEST PARAMS:", context.message.params if hasattr(context.message, 'params') else 'Unknown')
-        print("FULL REQUEST:", context.message)
+        
+        method = context.method
+        
+        if method == "resources/templates/list":
+            print("🔍 RESOURCE TEMPLATE LIST REQUEST DETECTED!")
+    
+        if method == "tools/list":
+            print("🔍 TOOL LIST REQUEST DETECTED!")
+        
         print("=============================")
         result = await call_next(context)
         return result
@@ -85,7 +91,7 @@ def external_data_extract_call(table_name, **kwargs) -> str:
         "query_parameters": f"?UserName={username}",
     }  
 
-    response = rpc_call("ExtractData", json_body, headers, service_code="", 60)
+    response = rpc_call("ExtractData", json_body, headers, service_code="", timeout=60)
     
     check_error_msg = response.get("Error")
     if check_error_msg:
@@ -209,7 +215,6 @@ def Extract_{table_name}(scenario_code: str, username: str):
         uri_params = "/".join([f"{{{arg}}}" for arg in ['scenario_code', 'username']])
         resource_uri = f"resource://Extract_{table_name}/{uri_params}"
 
-        # Register the resource
         mcp.resource(resource_uri)(resource_func)
 
 
@@ -220,10 +225,7 @@ def main():
     mcp.add_middleware(LoggingMiddleware())
     mcp.add_middleware(RequestLoggingMiddleware())
 
-    # service_code = get_service_code()
-    # deployment_code = get_deployment_code()
-    # username, password = get_user_credentials()
-    # set_rabbitmq_credentials(username, password)
+    
     mcp_service = load_service_config()
 
     tools = mcp_service.get('LLMServiceOptions').get('LLMTools', None)
@@ -254,6 +256,6 @@ def main():
             "inputSchema" : tool.parameters,
         })
         
-    return mcp, all_tools, all_resource_templates 
+    return mcp, transformed_tools, transformed_resource_templates 
 
 

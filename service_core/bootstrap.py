@@ -12,7 +12,7 @@ from service_core.logger import get_logger
 from service_core.config import load_services, load_service_config, get_user_credentials
 
 from service_core.rpc_server import start_rpc_consumer, start_rpc_consumer_mcp
-from mcp.app import main as mcp_main
+from icron_mcp.app import main as mcp_main
 
 load_dotenv()
 

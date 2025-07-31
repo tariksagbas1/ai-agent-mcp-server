@@ -89,7 +89,13 @@ def start_rpc_consumer_mcp(queue, host, port, username, password, virtual_host, 
                 resource_template_name = message.get("name")
                 arguments = message.get("arguments")
                 try:
-                    resource_template_object = asyncio.run(mcp.get_resource_template(f"resource://{resource_template_name}" + "/{scenario_code}/{username}"))
+                    # Extract scenario_code and username from arguments
+                    scenario_code = arguments.get("scenario_code", "")
+                    username = arguments.get("username", "")
+                    resource_uri = f"resource://{resource_template_name}/{scenario_code}/{username}"
+                    logger.info(f"[RPC] Reading resource with URI: {resource_uri}")
+                    
+                    resource_template_object = asyncio.run(mcp.get_resource_template(resource_uri))
                     response = asyncio.run(resource_template_object.read(arguments))
                     result = {"response" : response}
                 except Exception as e:

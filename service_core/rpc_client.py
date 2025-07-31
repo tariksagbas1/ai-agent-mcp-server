@@ -58,13 +58,20 @@ def rpc_call(message_code: str, payload: dict, headers:dict, service_code:str, t
 
 def rpc_call_mcp(message_code: str, payload: dict, headers:dict, message_type : str ,timeout=20):
     
-    service = load_service_config()
-    metadata = resolve([service], message_code, os.getenv("SERVICE_CODE"), prefer_server=False)
+    metadata = {
+        "exchange": "MCP_Exchange",
+        "routing_key": "MCP",
+        "host": "localhost",
+        "vhost" : "tarik.sagbas",
+        "port" : 5672,
+        "username" : "platform",
+        "password" : "platform"
+    }
   
     connection = pika.BlockingConnection(get_connection_parameters(metadata))
     channel = connection.channel()
 
-    result = channel.queue_declare(queue='testreplyqueue', exclusive=True)
+    result = channel.queue_declare(queue='', exclusive=True)
     callback_queue = result.method.queue
     correlation_id = str(uuid.uuid4())
 
