@@ -3,7 +3,7 @@
 ## Overview
 This project creates a unique example of an MCP Server on AMQP transport. The client-server and server-tools connections are all made through a RabbitMQ message broker via AMQP. Every client creates a new queue to be consumed constantly by the MCP Server. The client is accessed through the chat UI along with the MCP Inspector features, which also communicate with the server through AMQP. A specific RabbitMQ package has been developed for this MCP project which can also be found here. 
 ### Testing
-Testing environment requires RabbitMQ docker image, a valid json configuration file (a test file is provided) and a pip environment along with queues, exchanges, services to be defined on RabbitMQ accordingly.
+Testing environment requires RabbitMQ docker image along with queues, exchanges, services to be defined on RabbitMQ, a valid json configuration file (a test file is provided) and a pip environment.
 
 ### Contents
 - MCP Server
