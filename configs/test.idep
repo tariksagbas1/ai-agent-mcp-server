@@ -648,7 +648,7 @@
         "LLMCredentials": [
           {
             "Name": "openai",
-            "APIKey": "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"
+            "APIKey": ""
           }
         ]
       }
